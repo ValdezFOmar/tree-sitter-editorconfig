@@ -17,6 +17,7 @@ module.exports = grammar({
   name: 'editorconfig',
 
   extras: _ => [/[ \t]/],
+  word: $ => $._anything,
 
   rules: {
     document: $ => seq(
@@ -34,7 +35,7 @@ module.exports = grammar({
 
     section: $ => seq(
       $.section_header,
-      repeat(seq($._line))
+      repeat($._line)
     ),
 
     section_header: $ => seq(
@@ -45,13 +46,17 @@ module.exports = grammar({
     ),
 
     pair: $ => seq(
-      alias(/[^;#=\s\[]+/, $.key),
+      field('key', alias(/[^;#=\s\[][^=\n]*/, $.identifier)),
       '=',
-      $.value,
+      /[ \t]*/, // Eat all the leading white-space
+      field('value', $._value),
       $._newline,
     ),
 
-    value: $ => choice(
+    _value: $ => choice(
+      // The spec allows the use of arbitrary values even if they are not supported
+      // so this capture is used as a fallback if no supported values matches
+      alias($._anything, $.other),
       alias('unset', $.unset),
       alias(/\d+/, $.number),
       alias(/[a-z]{2}-[A-Z]{2}/, $.spelling_language),
@@ -61,6 +66,7 @@ module.exports = grammar({
       ...makeValues($.charset, 'latin1', 'utf-8', 'utf-16be', 'utf-16le', 'utf-8-bom'),
     ),
 
+    _anything: _ => /.*\S/,
     _newline: _ => /\r?\n/,
   }
 });

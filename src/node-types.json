@@ -21,20 +21,55 @@
   {
     "type": "pair",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "key",
-          "named": true
-        },
-        {
-          "type": "value",
-          "named": true
-        }
-      ]
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "charset",
+            "named": true
+          },
+          {
+            "type": "end_of_line",
+            "named": true
+          },
+          {
+            "type": "indent_style",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "other",
+            "named": true
+          },
+          {
+            "type": "spelling_language",
+            "named": true
+          },
+          {
+            "type": "unset",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -95,45 +130,6 @@
     }
   },
   {
-    "type": "value",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "boolean",
-          "named": true
-        },
-        {
-          "type": "charset",
-          "named": true
-        },
-        {
-          "type": "end_of_line",
-          "named": true
-        },
-        {
-          "type": "indent_style",
-          "named": true
-        },
-        {
-          "type": "number",
-          "named": true
-        },
-        {
-          "type": "spelling_language",
-          "named": true
-        },
-        {
-          "type": "unset",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "=",
     "named": false
   },
@@ -162,15 +158,19 @@
     "named": true
   },
   {
+    "type": "identifier",
+    "named": true
+  },
+  {
     "type": "indent_style",
     "named": true
   },
   {
-    "type": "key",
+    "type": "number",
     "named": true
   },
   {
-    "type": "number",
+    "type": "other",
     "named": true
   },
   {

@@ -1,5 +1,6 @@
 {
   "name": "editorconfig",
+  "word": "_anything",
   "rules": {
     "document": {
       "type": "SEQ",
@@ -56,13 +57,8 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_line"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "_line"
           }
         }
       ]
@@ -97,21 +93,33 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
+          "type": "FIELD",
+          "name": "key",
           "content": {
-            "type": "PATTERN",
-            "value": "[^;#=\\s\\[]+"
-          },
-          "named": true,
-          "value": "key"
+            "type": "ALIAS",
+            "content": {
+              "type": "PATTERN",
+              "value": "[^;#=\\s\\[][^=\\n]*"
+            },
+            "named": true,
+            "value": "identifier"
+          }
         },
         {
           "type": "STRING",
           "value": "="
         },
         {
-          "type": "SYMBOL",
-          "name": "value"
+          "type": "PATTERN",
+          "value": "[ \\t]*"
+        },
+        {
+          "type": "FIELD",
+          "name": "value",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_value"
+          }
         },
         {
           "type": "SYMBOL",
@@ -119,9 +127,18 @@
         }
       ]
     },
-    "value": {
+    "_value": {
       "type": "CHOICE",
       "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_anything"
+          },
+          "named": true,
+          "value": "other"
+        },
         {
           "type": "ALIAS",
           "content": {
@@ -267,6 +284,10 @@
           "value": "charset"
         }
       ]
+    },
+    "_anything": {
+      "type": "PATTERN",
+      "value": ".*\\S"
     },
     "_newline": {
       "type": "PATTERN",

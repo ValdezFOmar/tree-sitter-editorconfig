@@ -1,0 +1,11 @@
+root = true
+
+[*.js]
+        This is a valid key = 4_450
+end_of_line = utf-8
+
+# Also valid keys
+charset = o
+v = one
+
+# vim: ft=editorconfig

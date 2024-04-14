@@ -1,0 +1,184 @@
+======================================================
+Basic `.editorconfig` file
+======================================================
+
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+# test comment inside a section
+insert_final_newline = true
+
+------------------------------------------------------
+
+(document
+  (preamble
+    (comment)
+    (comment)
+    (pair
+      key: (identifier)
+      value: (boolean))
+    (comment))
+  (section
+    (section_header
+      (section_name))
+    (pair
+      key: (identifier)
+      value: (end_of_line))
+    (comment)
+    (pair
+      key: (identifier)
+      value: (boolean))))
+
+
+======================================================
+Supported values
+======================================================
+
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = false
+indent_size = true
+charset = utf-8
+spelling_language = es-MX
+max_line_length = 100
+
+[*.js]
+end_of_line = crlf
+indent_style = space
+insert_final_newline = true
+
+[*.ts]
+end_of_line = cr
+indent_style = tab
+indent_size = 4
+
+[*.md]
+max_line_length = off
+
+------------------------------------------------------
+
+(document
+  (preamble
+    (pair
+      key: (identifier)
+      value: (boolean)))
+  (section
+    (section_header
+      (section_name))
+    (pair
+      key: (identifier)
+      value: (end_of_line))
+    (pair
+      key: (identifier)
+      value: (boolean))
+    (pair
+      key: (identifier)
+      value: (boolean))
+    (pair
+      key: (identifier)
+      value: (charset))
+    (pair
+      key: (identifier)
+      value: (spelling_language))
+    (pair
+      key: (identifier)
+      value: (number)))
+  (section
+    (section_header
+      (section_name))
+    (pair
+      key: (identifier)
+      value: (end_of_line))
+    (pair
+      key: (identifier)
+      value: (indent_style))
+    (pair
+      key: (identifier)
+      value: (boolean)))
+  (section
+    (section_header
+      (section_name))
+    (pair
+      key: (identifier)
+      value: (end_of_line))
+    (pair
+      key: (identifier)
+      value: (indent_style))
+    (pair
+      key: (identifier)
+      value: (number)))
+  (section
+    (section_header
+      (section_name))
+    (pair
+      key: (identifier)
+      value: (boolean))))
+
+======================================================
+Unsupported keys and values with spaces
+======================================================
+[*]
+# space should not matter
+  my_custom_key = myval
+key with spaces = value with spaces
+    This [ also counts = also this =
+charset = utf-8
+key = # this is not a comment
+
+------------------------------------------------------
+
+(document
+  (section
+    (section_header
+      (section_name))
+  (comment)
+  (pair
+    key: (identifier)
+    value: (other))
+  (pair
+    key: (identifier)
+    value: (other))
+  (pair
+    key: (identifier)
+    value: (other))
+  (pair
+    key: (identifier)
+    value: (charset))
+  (pair
+    key: (identifier)
+    value: (other))))
+
+======================================================
+Case insensitive options
+======================================================
+[*]
+charset = UtF-8
+end_of_line = cRlF
+insert_final_newline = tRuE
+indent_style = sPAce
+
+------------------------------------------------------
+
+(document
+  (section
+    (section_header
+      (section_name))
+  (pair
+    key: (identifier)
+    value: (charset))
+  (pair
+    key: (identifier)
+    value: (end_of_line))
+  (pair
+    key: (identifier)
+    value: (boolean))
+  (pair
+    key: (identifier)
+    value: (indent_style))))

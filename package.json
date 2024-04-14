@@ -48,7 +48,7 @@
     {
       "scope": "source.editorconfig",
       "injection-regex": "^editorconfig$",
-      "file-types": ["editorconfig"],
+      "file-types": [".editorconfig", "editorconfig"],
       "highlights": "queries/highlights.scm"
     }
   ]

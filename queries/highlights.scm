@@ -1,21 +1,34 @@
 (comment) @comment @spell
 
+(character) @type
+
 [
  "["
  "]"
+ "{"
+ "}"
 ] @punctuation.bracket
 
-"=" @operator
+[
+  (path_separator)
+  ","
+] @punctuation.delimiter
 
-(section_header
-  (section_name) @type)
+[
+  ".."
+  "="
+  (wildcard_chars)
+  (wildcard_chars_allow_slash)
+  (wildcard_char_single)
+] @operator
+
+(escaped_character) @string.escape
 
 (pair
   key: (identifier) @property)
 
 (boolean) @boolean
 (number) @number
-(other) @string
 
 [
   (unset)

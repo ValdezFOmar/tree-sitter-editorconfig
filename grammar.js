@@ -1,17 +1,30 @@
 /**
  * @file EditorConfig specification v0.16.0 grammar for tree-sitter
- * @author Omar Valdez <omarantoniovaldezf2@gmail.com> 
+ * @author Omar Valdez <omarantoniovaldezf2@gmail.com>
  * @license MIT
- * @see {@link https://spec.editorconfig.org/|EditorConfig Especification}
- * @see {@link https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties}
+ * @see {@link https://spec.editorconfig.org/ EditorConfig Especification}
+ * @see {@link https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties EditorConfig Properties}
  *
- * Some rules where taken/adapted from other tree-sitter parsers:
+ * @description Some rules where taken/adapted from other tree-sitter parsers:
  * @see {@link https://github.com/justinmk/tree-sitter-ini}
  * @see {@link https://github.com/shunsambongi/tree-sitter-gitignore}
  */
 
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
+
+// Characters that have a special meaning in glob expressions
+// but necessarily in nested expressions
+const GLOB_SPECIAL_CHARS = [
+  '*',
+  '?',
+  '[',
+  ']',
+  '{',
+  '}',
+];
+
+const ESCAPED_SPECIAL_CHARS = escapeRegExp(GLOB_SPECIAL_CHARS.join(''));
 
 module.exports = grammar({
   name: 'editorconfig',
@@ -40,9 +53,37 @@ module.exports = grammar({
 
     section_header: $ => seq(
       '[',
-      alias(/[^\[\]\n]+/, $.section_name),
+      alias($._glob_expression, $.section_name),
       ']',
       $._newline
+    ),
+
+    // https://spec.editorconfig.org/#glob-expressions
+    _glob_expression: $ => repeat1(choice(
+      alias('*', $.wildcard_chars),
+      alias('**', $.wildcard_chars_allow_slash),
+      alias('?', $.wildcard_char_single),
+      alias('/', $.path_separator),
+      alias(new RegExp(`[^${ESCAPED_SPECIAL_CHARS}\\n]`), $.character),
+      alias(/\\./, $.escaped_character),
+      $.sequence_expression,
+      $.brace_expansion,
+    )),
+
+    brace_expansion: $ => seq(
+      '{',
+      repeat(choice(',', $.expansion_string)), // Empty expansions are allowed
+      '}',
+    ),
+
+    expansion_string: $ => prec.left(repeat1(prec.right($._glob_expression))),
+
+    sequence_expression: $ => seq(
+      '{',
+      field('start', alias(/-?\d+/, $.number)),
+      '..',
+      field('end', alias(/-?\d+/, $.number)),
+      '}',
     ),
 
     pair: $ => seq(
@@ -55,9 +96,9 @@ module.exports = grammar({
 
     _value: $ => choice(
       // The spec allows the use of arbitrary values even if they are not supported
-      // so this capture is used as a fallback if no supported values matches
+      // so this capture is used as a fallback if no supported values match
       alias($._anything, $.other),
-      alias('unset', $.unset),
+      alias(toCaseInsensitive('unset'), $.unset),
       alias(/\d+/, $.number),
       alias(/[a-z]{2}-[A-Z]{2}/, $.spelling_language),
       ...makeValues($.boolean, 'true', 'false', 'off'),
@@ -71,6 +112,15 @@ module.exports = grammar({
   }
 });
 
+
+/**
+ * @param {string} string The string to escape characters from
+ * @returns {string} The escaped string
+ * @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions#escaping
+ */
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+}
 
 /**
  * @param {SymbolRule<string>} namedNode The name of the node to alias these values

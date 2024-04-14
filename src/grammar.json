@@ -73,8 +73,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "[^\\[\\]\\n]+"
+            "type": "SYMBOL",
+            "name": "_glob_expression"
           },
           "named": true,
           "value": "section_name"
@@ -86,6 +86,163 @@
         {
           "type": "SYMBOL",
           "name": "_newline"
+        }
+      ]
+    },
+    "_glob_expression": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "STRING",
+              "value": "*"
+            },
+            "named": true,
+            "value": "wildcard_chars"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "STRING",
+              "value": "**"
+            },
+            "named": true,
+            "value": "wildcard_chars_allow_slash"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "STRING",
+              "value": "?"
+            },
+            "named": true,
+            "value": "wildcard_char_single"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "STRING",
+              "value": "/"
+            },
+            "named": true,
+            "value": "path_separator"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "PATTERN",
+              "value": "[^\\*\\?\\[\\]\\{\\}\\n]"
+            },
+            "named": true,
+            "value": "character"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "PATTERN",
+              "value": "\\\\."
+            },
+            "named": true,
+            "value": "escaped_character"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "sequence_expression"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "brace_expansion"
+          }
+        ]
+      }
+    },
+    "brace_expansion": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "SYMBOL",
+                "name": "expansion_string"
+              }
+            ]
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "expansion_string": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "PREC_RIGHT",
+          "value": 0,
+          "content": {
+            "type": "SYMBOL",
+            "name": "_glob_expression"
+          }
+        }
+      }
+    },
+    "sequence_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "FIELD",
+          "name": "start",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "PATTERN",
+              "value": "-?\\d+"
+            },
+            "named": true,
+            "value": "number"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ".."
+        },
+        {
+          "type": "FIELD",
+          "name": "end",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "PATTERN",
+              "value": "-?\\d+"
+            },
+            "named": true,
+            "value": "number"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
         }
       ]
     },
@@ -142,8 +299,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "unset"
+            "type": "PATTERN",
+            "value": "[uU][nN][sS][eE][tT]"
           },
           "named": true,
           "value": "unset"

@@ -25,7 +25,8 @@ insert_final_newline = true
     (comment))
   (section
     (section_header
-      (section_name))
+      (section_name
+        (wildcard_chars)))
     (pair
       key: (identifier)
       value: (end_of_line))
@@ -33,7 +34,6 @@ insert_final_newline = true
     (pair
       key: (identifier)
       value: (boolean))))
-
 
 ======================================================
 Supported values
@@ -71,7 +71,8 @@ max_line_length = off
       value: (boolean)))
   (section
     (section_header
-      (section_name))
+      (section_name
+        (wildcard_chars)))
     (pair
       key: (identifier)
       value: (end_of_line))
@@ -92,7 +93,11 @@ max_line_length = off
       value: (number)))
   (section
     (section_header
-      (section_name))
+      (section_name
+        (wildcard_chars)
+        (character)
+        (character)
+        (character)))
     (pair
       key: (identifier)
       value: (end_of_line))
@@ -104,7 +109,11 @@ max_line_length = off
       value: (boolean)))
   (section
     (section_header
-      (section_name))
+      (section_name
+        (wildcard_chars)
+        (character)
+        (character)
+        (character)))
     (pair
       key: (identifier)
       value: (end_of_line))
@@ -116,7 +125,11 @@ max_line_length = off
       value: (number)))
   (section
     (section_header
-      (section_name))
+      (section_name
+        (wildcard_chars)
+        (character)
+        (character)
+        (character)))
     (pair
       key: (identifier)
       value: (boolean))))
@@ -137,23 +150,24 @@ key = # this is not a comment
 (document
   (section
     (section_header
-      (section_name))
-  (comment)
-  (pair
-    key: (identifier)
-    value: (other))
-  (pair
-    key: (identifier)
-    value: (other))
-  (pair
-    key: (identifier)
-    value: (other))
-  (pair
-    key: (identifier)
-    value: (charset))
-  (pair
-    key: (identifier)
-    value: (other))))
+      (section_name
+        (wildcard_chars)))
+    (comment)
+    (pair
+      key: (identifier)
+      value: (other))
+    (pair
+      key: (identifier)
+      value: (other))
+    (pair
+      key: (identifier)
+      value: (other))
+    (pair
+      key: (identifier)
+      value: (charset))
+    (pair
+      key: (identifier)
+      value: (other))))
 
 ======================================================
 Case insensitive options
@@ -169,16 +183,155 @@ indent_style = sPAce
 (document
   (section
     (section_header
-      (section_name))
-  (pair
-    key: (identifier)
-    value: (charset))
-  (pair
-    key: (identifier)
-    value: (end_of_line))
-  (pair
-    key: (identifier)
-    value: (boolean))
-  (pair
-    key: (identifier)
-    value: (indent_style))))
+      (section_name
+        (wildcard_chars)))
+    (pair
+      key: (identifier)
+      value: (charset))
+    (pair
+      key: (identifier)
+      value: (end_of_line))
+    (pair
+      key: (identifier)
+      value: (boolean))
+    (pair
+      key: (identifier)
+      value: (indent_style))))
+
+======================================================
+Brace expansions, wild-cards, directory separator
+======================================================
+[{}]
+empty = true
+
+[/usr/{ucb/{ex,edit},lib/{ex?.?*,how_ex}}]
+key=val
+
+[*.{,txt,md,tex,\,}]
+key=val
+
+[*{-4..3}/***/*.py]
+key=val
+
+[*.{js}]
+key=val
+
+------------------------------------------------------
+
+(document
+  (section
+    (section_header
+      (section_name
+        (brace_expansion)))
+    (pair
+      key: (identifier)
+      value: (boolean)))
+  (section
+    (section_header
+      (section_name
+        (path_separator)
+        (character)
+        (character)
+        (character)
+        (path_separator)
+        (brace_expansion
+          (expansion_string
+            (character)
+            (character)
+            (character)
+            (path_separator)
+            (brace_expansion
+              (expansion_string
+                (character)
+                (character))
+              (expansion_string
+                (character)
+                (character)
+                (character)
+                (character))))
+          (expansion_string
+            (character)
+            (character)
+            (character)
+            (path_separator)
+            (brace_expansion
+              (expansion_string
+                (character)
+                (character)
+                (wildcard_char_single)
+                (character)
+                (wildcard_char_single)
+                (wildcard_chars))
+              (expansion_string
+                (character)
+                (character)
+                (character)
+                (character)
+                (character)
+                (character)))))))
+    (pair
+      key: (identifier)
+      value: (other)))
+  (section
+    (section_header
+      (section_name
+        (wildcard_chars)
+        (character)
+        (brace_expansion
+          (expansion_string
+            (character)
+            (character)
+            (character))
+          (expansion_string
+            (character)
+            (character))
+          (expansion_string
+            (character)
+            (character)
+            (character))
+          (expansion_string
+            (escaped_character)))))
+    (pair
+      key: (identifier)
+      value: (other)))
+  (section
+    (section_header
+      (section_name
+        (wildcard_chars)
+        (sequence_expression
+          start: (number)
+          end: (number))
+        (path_separator)
+        (wildcard_chars_allow_slash)
+        (wildcard_chars)
+        (path_separator)
+        (wildcard_chars)
+        (character)
+        (character)
+        (character)))
+    (pair
+      key: (identifier)
+      value: (other)))
+  (section
+    (section_header
+      (section_name
+        (wildcard_chars)
+        (character)
+        (brace_expansion
+          (expansion_string
+            (character)
+            (character)))))
+    (pair
+      key: (identifier)
+      value: (other))))
+
+======================================================
+New line in section name
+:error
+======================================================
+
+[fai
+l]
+end_of_line = lf
+
+------------------------------------------------------

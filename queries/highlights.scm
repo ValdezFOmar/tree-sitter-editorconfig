@@ -2,6 +2,12 @@
 
 (character) @type
 
+(character_choice
+  (character) @constant)
+
+(character_range
+  (character) @constant)
+
 [
  "["
  "]"
@@ -15,8 +21,10 @@
 ] @punctuation.delimiter
 
 [
+  "-"
   ".."
   "="
+  (negation)
   (wildcard_chars)
   (wildcard_chars_allow_slash)
   (wildcard_char_single)

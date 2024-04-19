@@ -13,19 +13,6 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-// Characters that have a special meaning in glob expressions
-// but necessarily in nested expressions
-const GLOB_SPECIAL_CHARS = [
-  '*',
-  '?',
-  '[',
-  ']',
-  '{',
-  '}',
-];
-
-const ESCAPED_SPECIAL_CHARS = escapeRegExp(GLOB_SPECIAL_CHARS.join(''));
-
 module.exports = grammar({
   name: 'editorconfig',
 
@@ -47,11 +34,11 @@ module.exports = grammar({
     ),
 
     section: $ => seq(
-      $.section_header,
+      $._section_header,
       repeat($._line)
     ),
 
-    section_header: $ => seq(
+    _section_header: $ => seq(
       '[',
       alias($._glob_expression, $.section_name),
       ']',
@@ -64,11 +51,14 @@ module.exports = grammar({
       alias('**', $.wildcard_chars_allow_slash),
       alias('?', $.wildcard_char_single),
       alias('/', $.path_separator),
-      alias(new RegExp(`[^${ESCAPED_SPECIAL_CHARS}\\n]`), $.character),
-      alias(/\\./, $.escaped_character),
-      $.sequence_expression,
+      alias(/[^?*/\n{}\[\]]/, $.character),
+      $.escaped_character,
+      $.integer_range,
       $.brace_expansion,
+      $.character_choice,
     )),
+
+    escaped_character: _ => token(seq('\\', token.immediate(/\W/))),
 
     brace_expansion: $ => seq(
       '{',
@@ -78,12 +68,29 @@ module.exports = grammar({
 
     expansion_string: $ => prec.left(repeat1(prec.right($._glob_expression))),
 
-    sequence_expression: $ => seq(
+    integer_range: $ => seq(
       '{',
       field('start', alias(/-?\d+/, $.number)),
       '..',
       field('end', alias(/-?\d+/, $.number)),
       '}',
+    ),
+
+    character_choice: $ => seq(
+      '[',
+      optional(alias(token.immediate('!'), $.negation)),
+      repeat1(choice(
+        $.character_range,
+        $.escaped_character,
+        alias(/[^\]\n/]/, $.character),
+      )),
+      ']',
+    ),
+
+    character_range: $ => seq(
+      field('start', alias(/[^\]\n/]/, $.character)),
+      token.immediate('-'),
+      field('end', alias(token.immediate(/\w/), $.character)),
     ),
 
     pair: $ => seq(
@@ -112,15 +119,6 @@ module.exports = grammar({
   }
 });
 
-
-/**
- * @param {string} string The string to escape characters from
- * @returns {string} The escaped string
- * @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions#escaping
- */
-function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
-}
 
 /**
  * @param {SymbolRule<string>} namedNode The name of the node to alias these values

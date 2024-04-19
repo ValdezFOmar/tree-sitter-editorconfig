@@ -43,7 +43,8 @@
     "build-wasm": "tree-sitter build --wasm",
     "test": "tree-sitter test",
     "parse": "tree-sitter parse",
-    "trim-parse": "f() { tree-sitter parse \"${1:-examples/simple.editorconfig}\" | sed 's/ \\[.\\+\\]//g'; }; f"
+    "trim-parse": "f() { tree-sitter parse \"${1:-examples/simple.editorconfig}\" | sed 's/ \\[.\\+\\]//g'; }; f",
+    "state": "tree-sitter generate --report-states-for-rule -"
   },
   "tree-sitter": [
     {

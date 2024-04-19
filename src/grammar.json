@@ -52,7 +52,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "section_header"
+          "name": "_section_header"
         },
         {
           "type": "REPEAT",
@@ -63,7 +63,7 @@
         }
       ]
     },
-    "section_header": {
+    "_section_header": {
       "type": "SEQ",
       "members": [
         {
@@ -134,27 +134,45 @@
             "type": "ALIAS",
             "content": {
               "type": "PATTERN",
-              "value": "[^\\*\\?\\[\\]\\{\\}\\n]"
+              "value": "[^?*/\\n{}\\[\\]]"
             },
             "named": true,
             "value": "character"
           },
           {
-            "type": "ALIAS",
-            "content": {
-              "type": "PATTERN",
-              "value": "\\\\."
-            },
-            "named": true,
-            "value": "escaped_character"
+            "type": "SYMBOL",
+            "name": "escaped_character"
           },
           {
             "type": "SYMBOL",
-            "name": "sequence_expression"
+            "name": "integer_range"
           },
           {
             "type": "SYMBOL",
             "name": "brace_expansion"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "character_choice"
+          }
+        ]
+      }
+    },
+    "escaped_character": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\"
+          },
+          {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "\\W"
+            }
           }
         ]
       }
@@ -203,7 +221,7 @@
         }
       }
     },
-    "sequence_expression": {
+    "integer_range": {
       "type": "SEQ",
       "members": [
         {
@@ -243,6 +261,105 @@
         {
           "type": "STRING",
           "value": "}"
+        }
+      ]
+    },
+    "character_choice": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "STRING",
+                  "value": "!"
+                }
+              },
+              "named": true,
+              "value": "negation"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "character_range"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "escaped_character"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[^\\]\\n/]"
+                },
+                "named": true,
+                "value": "character"
+              }
+            ]
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "character_range": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "start",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "PATTERN",
+              "value": "[^\\]\\n/]"
+            },
+            "named": true,
+            "value": "character"
+          }
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "-"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "end",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\w"
+              }
+            },
+            "named": true,
+            "value": "character"
+          }
         }
       ]
     },

@@ -1,5 +1,14 @@
 root = true
 
+[*.log]
+llave=valor
+
+[*]
+ley_=1
+
+[*.py[!io*a\-]\]]
+key=value
+
 [{}]
 empty = true
 

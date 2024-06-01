@@ -1,11 +1,13 @@
 (comment) @comment @spell
 
-(character) @type
+; consistency with ini and toml
+(section_name
+  (character) @type)
+
+(expansion_string
+  (character) @type)
 
 (character_choice
-  (character) @constant)
-
-(character_range
   (character) @constant)
 
 [

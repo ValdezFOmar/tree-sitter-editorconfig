@@ -1,0 +1,27 @@
+[{,1,2,3}]
+n=1
+[{-1,2,3}]
+n=2
+[{6six}]
+empty=true
+[{4,5}]
+empty=true
+[{-1000,2,3}]
+number=true
+[{1..2}]
+int=range
+[[chr]]
+key=val
+
+[[-ch]]
+key=val
+
+[[c-h]]
+key=val
+
+[[a-eas]]
+key=val
+
+[[sa-e5\-\[]]
+key=val
+# vim: ft=editorconfig

@@ -62,6 +62,9 @@ module.exports = grammar({
 
     brace_expansion: $ => seq(
       '{',
+      // WIP: This is captured as its own node instead of being
+      // part of the expasion_string
+      optional(token.immediate(/-?\d+/)),
       repeat(choice(',', $.expansion_string)), // Empty expansions are allowed
       '}',
     ),
@@ -70,21 +73,21 @@ module.exports = grammar({
 
     integer_range: $ => seq(
       '{',
-      field('start', alias(/-?\d+/, $.number)),
-      '..',
-      field('end', alias(/-?\d+/, $.number)),
+      field('start', alias(token.immediate(/-?\d+/), $.number)),
+      token.immediate('..'),
+      field('end', alias(token.immediate(/-?\d+/), $.number)),
       '}',
     ),
 
-    character_choice: $ => seq(
-      '[',
+    character_choice: $ => seq('[', $._character_choice_content, ']'),
+
+    _character_choice_content: $ => seq(
       optional(alias(token.immediate('!'), $.negation)),
       repeat1(choice(
         $.character_range,
         $.escaped_character,
         alias(/[^\]\n/]/, $.character),
       )),
-      ']',
     ),
 
     character_range: $ => seq(

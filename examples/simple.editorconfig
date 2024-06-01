@@ -1,6 +1,6 @@
 root = true
 
-[*.log]
+[*.log[-a]]
 llave=valor
 
 [*]

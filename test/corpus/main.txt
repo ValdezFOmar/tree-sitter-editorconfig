@@ -505,3 +505,81 @@ Unescaped hyphen
 key=val
 
 ------------------------------------------------------
+
+======================================================
+Integer Range
+======================================================
+[{10..2}]
+[{1..-20}]
+[{-10..2}]
+[{-1..-20}]
+
+------------------------------------------------------
+(document
+  (section
+    (section_name
+      (integer_range
+        start: (number)
+        end: (number))))
+  (section
+    (section_name
+      (integer_range
+        start: (number)
+        end: (number))))
+  (section
+    (section_name
+      (integer_range
+        start: (number)
+        end: (number))))
+  (section
+    (section_name
+      (integer_range
+        start: (number)
+        end: (number)))))
+
+======================================================
+Brace expansions with numbers
+======================================================
+[{10a}]
+[{-3a}]
+[{-3b,c}]
+[{30,-44,5}]
+
+------------------------------------------------------
+
+(document
+  (section
+    (section_name
+      (brace_expansion
+        (expansion_string
+          (character)
+          (character)
+          (character)))))
+  (section
+    (section_name
+      (brace_expansion
+        (expansion_string
+          (character)
+          (character)
+          (character)))))
+  (section
+    (section_name
+      (brace_expansion
+        (expansion_string
+          (character)
+          (character)
+          (character))
+        (expansion_string
+          (character)))))
+  (section
+    (section_name
+      (brace_expansion
+        (expansion_string
+          (character)
+          (character))
+        (expansion_string
+          (character)
+          (character)
+          (character))
+        (expansion_string
+          (character))))))

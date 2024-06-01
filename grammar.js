@@ -16,6 +16,11 @@
 module.exports = grammar({
   name: 'editorconfig',
 
+  externals: $ => [
+    $._integer_range_start,
+    $._error_sentinel, // Not used for grammar, only for scanner
+  ],
+
   extras: _ => [/[ \t]/],
   word: $ => $._anything,
 
@@ -60,31 +65,27 @@ module.exports = grammar({
 
     escaped_character: _ => token(seq('\\', token.immediate(/\W/))),
 
-    brace_expansion: $ => seq(
-      '{',
-      repeat(choice(',', $.expansion_string)), // Empty expansions are allowed
-      '}',
-    ),
-
+    // Empty strings are allowed
+    brace_expansion: $ => seq('{', repeat(choice(',', $.expansion_string)), '}'),
     expansion_string: $ => prec.left(repeat1(prec.right($._glob_expression))),
 
     integer_range: $ => seq(
       '{',
-      field('start', alias(/-?\d+/, $.number)),
-      '..',
-      field('end', alias(/-?\d+/, $.number)),
+      field('start', alias($._integer_range_start, $.number)),
+      token.immediate('..'),
+      field('end', alias(token.immediate(/-?\d+/), $.number)),
       '}',
     ),
 
-    character_choice: $ => seq(
-      '[',
+    character_choice: $ => seq('[', $._character_choice_content, ']'),
+
+    _character_choice_content: $ => seq(
       optional(alias(token.immediate('!'), $.negation)),
       repeat1(choice(
         $.character_range,
         $.escaped_character,
         alias(/[^\]\n/]/, $.character),
       )),
-      ']',
     ),
 
     character_range: $ => seq(

@@ -9,6 +9,16 @@ end_of_line =      LF
     insert_final_newline = true   
     spelling_language = true  
 
+[[c-h]]
+[[pa-e]]
+[[a-ea]]
+[[sa-e0]]
+
+[[!c-h]]
+[[!pa-e]]
+[[!a-ea]]
+[[!sa-e0]]
+
 [{10..2}]
 [{1..-20}]
 [{-10..2}]

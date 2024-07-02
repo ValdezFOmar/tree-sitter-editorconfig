@@ -8,7 +8,6 @@ The parser tries to be complaint with version 0.16.0 of the [specification](http
 
 # TODO
 
-- [x] Implement normal and negated character classes
 - [ ] Test against [real-world examples](https://github.com/editorconfig/editorconfig/wiki/Projects-Using-EditorConfig)
 - [ ] Lint and format code
 - [ ] CI integration

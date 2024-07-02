@@ -327,7 +327,7 @@
                 "type": "ALIAS",
                 "content": {
                   "type": "PATTERN",
-                  "value": "[^\\]\\n/]"
+                  "value": "[^\\]\\r\\n/]"
                 },
                 "named": true,
                 "value": "character"
@@ -347,7 +347,7 @@
             "type": "ALIAS",
             "content": {
               "type": "PATTERN",
-              "value": "[^\\]\\n/]"
+              "value": "[^\\]\\r\\n/]"
             },
             "named": true,
             "value": "character"

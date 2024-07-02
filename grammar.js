@@ -84,12 +84,12 @@ module.exports = grammar({
       repeat1(choice(
         $.character_range,
         $.escaped_character,
-        alias(/[^\]\n/]/, $.character),
+        alias(/[^\]\r\n/]/, $.character),
       )),
     ),
 
     character_range: $ => seq(
-      field('start', alias(/[^\]\n/]/, $.character)),
+      field('start', alias(/[^\]\r\n/]/, $.character)),
       token.immediate('-'),
       field('end', alias(token.immediate(/\w/), $.character)),
     ),

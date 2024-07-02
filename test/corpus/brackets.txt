@@ -1,0 +1,168 @@
+======================================================
+Character choice
+======================================================
+[[chr]]
+[[-ch]]
+[[[\]\-]]
+
+------------------------------------------------------
+
+(document
+  (section
+    (section_name
+      (character_choice
+        (character)
+        (character)
+        (character))))
+  (section
+    (section_name
+      (character_choice
+        (character)
+        (character)
+        (character))))
+  (section
+    (section_name
+      (character_choice
+        (character)
+        (escaped_character)
+        (escaped_character)))))
+
+======================================================
+Character choice (Negated)
+======================================================
+[[!chr]]
+[[!-ch]]
+[[![\]\-]]
+
+------------------------------------------------------
+
+(document
+  (section
+    (section_name
+      (character_choice
+        (negation)
+        (character)
+        (character)
+        (character))))
+  (section
+    (section_name
+      (character_choice
+        (negation)
+        (character)
+        (character)
+        (character))))
+  (section
+    (section_name
+      (character_choice
+        (negation)
+        (character)
+        (escaped_character)
+        (escaped_character)))))
+
+======================================================
+Character range
+======================================================
+[[c-h]]
+[[pa-e]]
+[[a-ea]]
+[[sa-e0]]
+
+------------------------------------------------------
+
+(document
+  (section
+    (section_name
+      (character_choice
+        (character_range
+          start: (character)
+          end: (character)))))
+  (section
+    (section_name
+      (character_choice
+        (character)
+        (character_range
+          start: (character)
+          end: (character)))))
+  (section
+    (section_name
+      (character_choice
+        (character_range
+          start: (character)
+          end: (character))
+        (character))))
+  (section
+    (section_name
+      (character_choice
+        (character)
+        (character_range
+          start: (character)
+          end: (character))
+        (character)))))
+
+======================================================
+Character range (Negated)
+======================================================
+[[!c-h]]
+[[!pa-e]]
+[[!a-ea]]
+[[!sa-e0]]
+
+------------------------------------------------------
+
+(document
+  (section
+    (section_name
+      (character_choice
+        (negation)
+        (character_range
+          start: (character)
+          end: (character)))))
+  (section
+    (section_name
+      (character_choice
+        (negation)
+        (character)
+        (character_range
+          start: (character)
+          end: (character)))))
+  (section
+    (section_name
+      (character_choice
+        (negation)
+        (character_range
+          start: (character)
+          end: (character))
+        (character))))
+  (section
+    (section_name
+      (character_choice
+        (negation)
+        (character)
+        (character_range
+          start: (character)
+          end: (character))
+        (character)))))
+
+======================================================
+Empty character choice
+:error
+======================================================
+[[]]
+
+------------------------------------------------------
+
+======================================================
+Empty character choice (Negated)
+:error
+======================================================
+[[!]]
+
+------------------------------------------------------
+
+======================================================
+Unescaped hyphen
+:error
+======================================================
+[[a-]]
+
+------------------------------------------------------

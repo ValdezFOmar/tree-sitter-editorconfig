@@ -1,14 +1,12 @@
-(comment) @comment @spell
+(comment) @comment
 
-; consistency with ini and toml
+(character) @constant
+
 (section_name
   (character) @type)
 
 (expansion_string
   (character) @type)
-
-(character_choice
-  (character) @constant)
 
 [
  "["
@@ -27,18 +25,18 @@
   ".."
   "="
   (negation)
-  (wildcard_chars)
-  (wildcard_chars_allow_slash)
-  (wildcard_char_single)
+  (wildcard_characters)
+  (wildcard_any_characters)
+  (wildcard_single_character)
 ] @operator
 
-(escaped_character) @string.escape
+(escaped_character) @string.special
 
 (pair
   key: (identifier) @property)
 
 (boolean) @boolean
-(number) @number
+(integer) @number
 
 [
   (unset)

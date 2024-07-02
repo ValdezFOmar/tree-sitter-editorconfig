@@ -101,7 +101,7 @@
               "value": "*"
             },
             "named": true,
-            "value": "wildcard_chars"
+            "value": "wildcard_characters"
           },
           {
             "type": "ALIAS",
@@ -110,7 +110,7 @@
               "value": "**"
             },
             "named": true,
-            "value": "wildcard_chars_allow_slash"
+            "value": "wildcard_any_characters"
           },
           {
             "type": "ALIAS",
@@ -119,7 +119,7 @@
               "value": "?"
             },
             "named": true,
-            "value": "wildcard_char_single"
+            "value": "wildcard_single_character"
           },
           {
             "type": "ALIAS",
@@ -238,7 +238,7 @@
               "name": "_integer_range_start"
             },
             "named": true,
-            "value": "number"
+            "value": "integer"
           }
         },
         {
@@ -261,7 +261,7 @@
               }
             },
             "named": true,
-            "value": "number"
+            "value": "integer"
           }
         },
         {
@@ -426,7 +426,7 @@
             "name": "_anything"
           },
           "named": true,
-          "value": "other"
+          "value": "unknown"
         },
         {
           "type": "ALIAS",
@@ -444,7 +444,7 @@
             "value": "\\d+"
           },
           "named": true,
-          "value": "number"
+          "value": "integer"
         },
         {
           "type": "ALIAS",

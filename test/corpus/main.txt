@@ -25,7 +25,7 @@ insert_final_newline = true
     (comment))
   (section
     (section_name
-      (wildcard_chars))
+      (wildcard_characters))
     (pair
       key: (identifier)
       value: (end_of_line))
@@ -70,7 +70,7 @@ max_line_length = off
       value: (boolean)))
   (section
     (section_name
-      (wildcard_chars))
+      (wildcard_characters))
     (pair
       key: (identifier)
       value: (end_of_line))
@@ -88,10 +88,10 @@ max_line_length = off
       value: (spelling_language))
     (pair
       key: (identifier)
-      value: (number)))
+      value: (integer)))
   (section
     (section_name
-      (wildcard_chars)
+      (wildcard_characters)
       (character)
       (character)
       (character))
@@ -106,7 +106,7 @@ max_line_length = off
       value: (boolean)))
   (section
     (section_name
-      (wildcard_chars)
+      (wildcard_characters)
       (character)
       (character)
       (character))
@@ -118,10 +118,10 @@ max_line_length = off
       value: (indent_style))
     (pair
       key: (identifier)
-      value: (number)))
+      value: (integer)))
   (section
     (section_name
-      (wildcard_chars)
+      (wildcard_characters)
       (character)
       (character)
       (character))
@@ -145,23 +145,23 @@ key = # this is not a comment
 (document
   (section
     (section_name
-      (wildcard_chars))
+      (wildcard_characters))
     (comment)
     (pair
       key: (identifier)
-      value: (other))
+      value: (unknown))
     (pair
       key: (identifier)
-      value: (other))
+      value: (unknown))
     (pair
       key: (identifier)
-      value: (other))
+      value: (unknown))
     (pair
       key: (identifier)
       value: (charset))
     (pair
       key: (identifier)
-      value: (other))))
+      value: (unknown))))
 
 ======================================================
 Case insensitive options
@@ -177,7 +177,7 @@ indent_style = sPAce
 (document
   (section
     (section_name
-      (wildcard_chars))
+      (wildcard_characters))
     (pair
       key: (identifier)
       value: (charset))
@@ -259,10 +259,10 @@ key=val
             (expansion_string
               (character)
               (character)
-              (wildcard_char_single)
+              (wildcard_single_character)
               (character)
-              (wildcard_char_single)
-              (wildcard_chars))
+              (wildcard_single_character)
+              (wildcard_characters))
             (expansion_string
               (character)
               (character)
@@ -272,10 +272,10 @@ key=val
               (character))))))
     (pair
       key: (identifier)
-      value: (other)))
+      value: (unknown)))
   (section
     (section_name
-      (wildcard_chars)
+      (wildcard_characters)
       (character)
       (brace_expansion
         (expansion_string
@@ -293,27 +293,27 @@ key=val
           (escaped_character))))
     (pair
       key: (identifier)
-      value: (other)))
+      value: (unknown)))
   (section
     (section_name
-      (wildcard_chars)
+      (wildcard_characters)
       (integer_range
-        start: (number)
-        end: (number))
+        start: (integer)
+        end: (integer))
       (path_separator)
-      (wildcard_chars_allow_slash)
-      (wildcard_chars)
+      (wildcard_any_characters)
+      (wildcard_characters)
       (path_separator)
-      (wildcard_chars)
+      (wildcard_characters)
       (character)
       (character)
       (character))
     (pair
       key: (identifier)
-      value: (other)))
+      value: (unknown)))
   (section
     (section_name
-      (wildcard_chars)
+      (wildcard_characters)
       (character)
       (brace_expansion
         (expansion_string
@@ -321,7 +321,7 @@ key=val
           (character))))
     (pair
       key: (identifier)
-      value: (other))))
+      value: (unknown))))
 
 ======================================================
 Integer Range
@@ -335,26 +335,26 @@ Integer Range
   (section
     (section_name
       (integer_range
-        start: (number)
-        end: (number))))
+        start: (integer)
+        end: (integer))))
   (section
     (section_name
       (integer_range
-        start: (number)
-        end: (number))))
+        start: (integer)
+        end: (integer))))
   (section
     (section_name
       (integer_range
-        start: (number)
-        end: (number))))
+        start: (integer)
+        end: (integer))))
   (section
     (section_name
       (integer_range
-        start: (number)
-        end: (number)))))
+        start: (integer)
+        end: (integer)))))
 
 ======================================================
-Brace expansions with numbers
+Brace expansions with integers
 ======================================================
 [{10a}]
 [{-3a}]

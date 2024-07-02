@@ -119,15 +119,15 @@
           "named": true
         },
         {
-          "type": "wildcard_char_single",
+          "type": "wildcard_any_characters",
           "named": true
         },
         {
-          "type": "wildcard_chars",
+          "type": "wildcard_characters",
           "named": true
         },
         {
-          "type": "wildcard_chars_allow_slash",
+          "type": "wildcard_single_character",
           "named": true
         }
       ]
@@ -142,7 +142,7 @@
         "required": true,
         "types": [
           {
-            "type": "number",
+            "type": "integer",
             "named": true
           }
         ]
@@ -152,7 +152,7 @@
         "required": true,
         "types": [
           {
-            "type": "number",
+            "type": "integer",
             "named": true
           }
         ]
@@ -194,15 +194,15 @@
             "named": true
           },
           {
-            "type": "number",
-            "named": true
-          },
-          {
-            "type": "other",
+            "type": "integer",
             "named": true
           },
           {
             "type": "spelling_language",
+            "named": true
+          },
+          {
+            "type": "unknown",
             "named": true
           },
           {
@@ -288,15 +288,15 @@
           "named": true
         },
         {
-          "type": "wildcard_char_single",
+          "type": "wildcard_any_characters",
           "named": true
         },
         {
-          "type": "wildcard_chars",
+          "type": "wildcard_characters",
           "named": true
         },
         {
-          "type": "wildcard_chars_allow_slash",
+          "type": "wildcard_single_character",
           "named": true
         }
       ]
@@ -359,15 +359,11 @@
     "named": true
   },
   {
+    "type": "integer",
+    "named": true
+  },
+  {
     "type": "negation",
-    "named": true
-  },
-  {
-    "type": "number",
-    "named": true
-  },
-  {
-    "type": "other",
     "named": true
   },
   {
@@ -379,19 +375,23 @@
     "named": true
   },
   {
+    "type": "unknown",
+    "named": true
+  },
+  {
     "type": "unset",
     "named": true
   },
   {
-    "type": "wildcard_char_single",
+    "type": "wildcard_any_characters",
     "named": true
   },
   {
-    "type": "wildcard_chars",
+    "type": "wildcard_characters",
     "named": true
   },
   {
-    "type": "wildcard_chars_allow_slash",
+    "type": "wildcard_single_character",
     "named": true
   },
   {

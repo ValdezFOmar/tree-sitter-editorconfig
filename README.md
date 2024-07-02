@@ -9,7 +9,7 @@ The parser tries to be complaint with version 0.16.0 of the [specification](http
 # TODO
 
 - [ ] Test against [real-world examples](https://github.com/editorconfig/editorconfig/wiki/Projects-Using-EditorConfig)
-- [ ] Lint and format code
+- [X] Lint and format code
 - [ ] CI integration
 - [ ] Editor integration
 - ~Test against [`editorconfig-core-test`](https://github.com/editorconfig/editorconfig-core-test/tree/master)~

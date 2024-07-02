@@ -40,9 +40,9 @@ module.exports = grammar({
     _glob_expression: $ =>
       repeat1(
         choice(
-          alias('*', $.wildcard_chars),
-          alias('**', $.wildcard_chars_allow_slash),
-          alias('?', $.wildcard_char_single),
+          alias('*', $.wildcard_characters),
+          alias('**', $.wildcard_any_characters),
+          alias('?', $.wildcard_single_character),
           alias('/', $.path_separator),
           alias(/[^?*/\n{}\[\]]/, $.character),
           $.escaped_character,
@@ -61,9 +61,9 @@ module.exports = grammar({
     integer_range: $ =>
       seq(
         '{',
-        field('start', alias($._integer_range_start, $.number)),
+        field('start', alias($._integer_range_start, $.integer)),
         token.immediate('..'),
-        field('end', alias(token.immediate(/-?\d+/), $.number)),
+        field('end', alias(token.immediate(/-?\d+/), $.integer)),
         '}',
       ),
 
@@ -95,9 +95,9 @@ module.exports = grammar({
       choice(
         // The spec allows the use of arbitrary values even if they are not supported
         // so this capture is used as a fallback if no supported values match
-        alias($._anything, $.other),
+        alias($._anything, $.unknown),
         alias(toCaseInsensitive('unset'), $.unset),
-        alias(/\d+/, $.number),
+        alias(/\d+/, $.integer),
         alias(/[a-z]{2}-[A-Z]{2}/, $.spelling_language),
         ...makeValues($.boolean, 'true', 'false', 'off'),
         ...makeValues($.indent_style, 'space', 'tab'),

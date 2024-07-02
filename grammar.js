@@ -13,10 +13,13 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+const NEWLINE = /\r?\n/;
+
 module.exports = grammar({
   name: 'editorconfig',
 
   externals: $ => [
+    $._end_of_file,
     $._integer_range_start,
     $._error_sentinel, // Not used for grammar, only for scanner
   ],
@@ -35,7 +38,7 @@ module.exports = grammar({
     _line: $ => choice(
       $.pair,
       $.comment,
-      $._newline,
+      NEWLINE,
     ),
 
     section: $ => seq(
@@ -116,7 +119,7 @@ module.exports = grammar({
     ),
 
     _anything: _ => /.*\S/,
-    _newline: _ => /\r?\n/,
+    _newline: $ => choice(NEWLINE, $._end_of_file),
   }
 });
 

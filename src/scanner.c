@@ -1,6 +1,7 @@
 #include "tree_sitter/parser.h"
 
 enum TokenType {
+    END_OF_FILE,
     INTEGER_RANGE_START,
     ERROR_SENTINEL,
 };
@@ -43,6 +44,15 @@ bool tree_sitter_editorconfig_external_scanner_scan(
     if (valid_symbols[ERROR_SENTINEL]) {
         // Tree-sitter is in error correction mode, don't parse anything
         return false;
+    }
+    if (valid_symbols[END_OF_FILE]) {
+        if (!lexer->eof(lexer)) {
+            return false;
+        }
+        lexer->advance(lexer, false);
+        lexer->mark_end(lexer);
+        lexer->result_symbol = END_OF_FILE;
+        return true;
     }
     const int32_t first_char = lexer->lookahead;
     if (valid_symbols[INTEGER_RANGE_START] && (first_char == '-' || is_digit(first_char))) {

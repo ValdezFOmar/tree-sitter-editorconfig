@@ -42,8 +42,8 @@
           "name": "comment"
         },
         {
-          "type": "SYMBOL",
-          "name": "_newline"
+          "type": "PATTERN",
+          "value": "\\r?\\n"
         }
       ]
     },
@@ -579,8 +579,17 @@
       "value": ".*\\S"
     },
     "_newline": {
-      "type": "PATTERN",
-      "value": "\\r?\\n"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\r?\\n"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_end_of_file"
+        }
+      ]
     }
   },
   "extras": [
@@ -592,6 +601,10 @@
   "conflicts": [],
   "precedences": [],
   "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "_end_of_file"
+    },
     {
       "type": "SYMBOL",
       "name": "_integer_range_start"

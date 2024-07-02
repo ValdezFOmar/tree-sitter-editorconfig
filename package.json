@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "prebuildify": "^6.0.0",
+    "prettier": "3.3.2",
     "tree-sitter-cli": "^0.22.2"
   },
   "peerDependencies": {
@@ -43,15 +44,28 @@
     "build-wasm": "tree-sitter build --wasm",
     "test": "tree-sitter test",
     "parse": "tree-sitter parse",
+    "format": "npx prettier --write grammar.js",
+    "check-format": "npx prettier --check grammar.js",
     "trim-parse": "f() { tree-sitter parse examples/.editorconfig | sed 's/ \\[.\\+\\]//g'; }; f",
     "state": "tree-sitter generate --report-states-for-rule -",
     "total-state": "npm run state 2>&1 >/dev/null | awk '{s+=$2} END {print \"Total State:\", s}'"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "printWidth": 100,
+    "semi": true,
+    "singleQuote": true,
+    "arrowParens": "avoid"
   },
   "tree-sitter": [
     {
       "scope": "source.editorconfig",
       "injection-regex": "^editorconfig$",
-      "file-types": [".editorconfig", "editorconfig"],
+      "file-types": [
+        ".editorconfig",
+        "editorconfig"
+      ],
       "highlights": "queries/highlights.scm"
     }
   ]

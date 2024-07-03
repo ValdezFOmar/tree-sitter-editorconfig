@@ -1,0 +1,204 @@
+======================================================
+Simple brace expansions
+======================================================
+[{}]
+[*.{a,b,c}]
+[{s,a}c]
+------------------------------------------------------
+(document
+  (section
+    (section_name
+      (brace_expansion)))
+  (section
+    (section_name
+      (wildcard_characters)
+      (character)
+      (brace_expansion
+        (expansion_string
+          (character))
+        (expansion_string
+          (character))
+        (expansion_string
+          (character)))))
+  (section
+    (section_name
+      (brace_expansion
+        (expansion_string
+          (character))
+        (expansion_string
+          (character)))
+      (character))))
+
+======================================================
+Brace exapansions with empty strings
+======================================================
+[{a,}]
+[{,a}]
+[{,a,}]
+[{a,,b}]
+------------------------------------------------------
+
+(document
+  (section
+    (section_name
+      (brace_expansion
+        (expansion_string
+          (character)))))
+  (section
+    (section_name
+      (brace_expansion
+        (expansion_string
+          (character)))))
+  (section
+    (section_name
+      (brace_expansion
+        (expansion_string
+          (character)))))
+  (section
+    (section_name
+      (brace_expansion
+        (expansion_string
+          (character))
+        (expansion_string
+          (character))))))
+
+======================================================
+Brace expansion with escaped characters
+======================================================
+[{a\,,\,,b}]
+[{a\}}]
+------------------------------------------------------
+
+(document
+  (section
+    (section_name
+      (brace_expansion
+        (expansion_string
+          (character)
+          (escaped_character))
+        (expansion_string
+          (escaped_character))
+        (expansion_string
+          (character)))))
+  (section
+    (section_name
+      (brace_expansion
+        (expansion_string
+          (character)
+          (escaped_character))))))
+
+======================================================
+Brace expansions with nested expressions
+======================================================
+[/a/**{b/{c,{1..9}},e[bc]/{f?.?*,g}}]
+------------------------------------------------------
+
+(document
+  (section
+    (section_name
+      (path_separator)
+      (character)
+      (path_separator)
+      (wildcard_any_characters)
+      (brace_expansion
+        (expansion_string
+          (character)
+          (path_separator)
+          (brace_expansion
+            (expansion_string
+              (character))
+            (expansion_string
+              (integer_range
+                start: (integer)
+                end: (integer)))))
+        (expansion_string
+          (character)
+          (character_choice
+            (character)
+            (character))
+          (path_separator)
+          (brace_expansion
+            (expansion_string
+              (character)
+              (wildcard_single_character)
+              (character)
+              (wildcard_single_character)
+              (wildcard_characters))
+            (expansion_string
+              (character))))))))
+
+======================================================
+Integer Range
+======================================================
+[{10..2}]
+[{1..-20}]
+[{-10..2}]
+[{-1..-20}]
+------------------------------------------------------
+(document
+  (section
+    (section_name
+      (integer_range
+        start: (integer)
+        end: (integer))))
+  (section
+    (section_name
+      (integer_range
+        start: (integer)
+        end: (integer))))
+  (section
+    (section_name
+      (integer_range
+        start: (integer)
+        end: (integer))))
+  (section
+    (section_name
+      (integer_range
+        start: (integer)
+        end: (integer)))))
+
+======================================================
+Brace expansions with integers
+======================================================
+[{10a}]
+[{-3a}]
+[{-3b,c}]
+[{30,-44,5}]
+------------------------------------------------------
+
+(document
+  (section
+    (section_name
+      (brace_expansion
+        (expansion_string
+          (character)
+          (character)
+          (character)))))
+  (section
+    (section_name
+      (brace_expansion
+        (expansion_string
+          (character)
+          (character)
+          (character)))))
+  (section
+    (section_name
+      (brace_expansion
+        (expansion_string
+          (character)
+          (character)
+          (character))
+        (expansion_string
+          (character)))))
+  (section
+    (section_name
+      (brace_expansion
+        (expansion_string
+          (character)
+          (character))
+        (expansion_string
+          (character)
+          (character)
+          (character))
+        (expansion_string
+          (character))))))

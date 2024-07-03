@@ -1,5 +1,5 @@
 ======================================================
-Basic `.editorconfig` file
+Basic .editorconfig file
 ======================================================
 
 # EditorConfig is awesome: https://EditorConfig.org
@@ -37,10 +37,9 @@ insert_final_newline = true
 ======================================================
 Supported values
 ======================================================
-
 root = true
 
-[*]
+[a]
 end_of_line = lf
 insert_final_newline = false
 indent_size = true
@@ -48,19 +47,18 @@ charset = utf-8
 spelling_language = es-MX
 max_line_length = 100
 
-[*.js]
+[b]
 end_of_line = crlf
 indent_style = space
 insert_final_newline = true
 
-[*.ts]
+[c]
 end_of_line = cr
 indent_style = tab
 indent_size = 4
 
-[*.md]
+[d]
 max_line_length = off
-
 ------------------------------------------------------
 
 (document
@@ -70,7 +68,7 @@ max_line_length = off
       value: (boolean)))
   (section
     (section_name
-      (wildcard_characters))
+      (character))
     (pair
       key: (identifier)
       value: (end_of_line))
@@ -91,9 +89,6 @@ max_line_length = off
       value: (integer)))
   (section
     (section_name
-      (wildcard_characters)
-      (character)
-      (character)
       (character))
     (pair
       key: (identifier)
@@ -106,9 +101,6 @@ max_line_length = off
       value: (boolean)))
   (section
     (section_name
-      (wildcard_characters)
-      (character)
-      (character)
       (character))
     (pair
       key: (identifier)
@@ -121,9 +113,6 @@ max_line_length = off
       value: (integer)))
   (section
     (section_name
-      (wildcard_characters)
-      (character)
-      (character)
       (character))
     (pair
       key: (identifier)
@@ -132,7 +121,7 @@ max_line_length = off
 ======================================================
 Unsupported keys and values with spaces
 ======================================================
-[*]
+[a]
 # space should not matter
   my_custom_key = myval
 key with spaces = value with spaces
@@ -145,7 +134,7 @@ key = # this is not a comment
 (document
   (section
     (section_name
-      (wildcard_characters))
+      (character))
     (comment)
     (pair
       key: (identifier)
@@ -164,9 +153,45 @@ key = # this is not a comment
       value: (unknown))))
 
 ======================================================
+Comments
+======================================================
+# Hash
+; Semicolon
+[#]
+;
+Key # = ; value
+#
+[;]
+;
+key ; = # value
+#
+------------------------------------------------------
+
+(document
+  (preamble
+    (comment)
+    (comment))
+  (section
+    (section_name
+      (character))
+    (comment)
+    (pair
+      key: (identifier)
+      value: (unknown))
+    (comment))
+  (section
+    (section_name
+      (character))
+    (comment)
+    (pair
+      key: (identifier)
+      value: (unknown))
+    (comment)))
+
+======================================================
 Case insensitive options
 ======================================================
-[*]
+[i]
 charset = UtF-8
 end_of_line = cRlF
 insert_final_newline = tRuE
@@ -177,7 +202,7 @@ indent_style = sPAce
 (document
   (section
     (section_name
-      (wildcard_characters))
+      (character))
     (pair
       key: (identifier)
       value: (charset))
@@ -192,212 +217,84 @@ indent_style = sPAce
       value: (indent_style))))
 
 ======================================================
-New line in section name
-:error
+Directory Separator
 ======================================================
-[fai
-l]
-end_of_line = lf
-
+[a/]
+[a/b]
+[/a/b]
 ------------------------------------------------------
-
-======================================================
-Brace expansions, wild-cards, directory separator
-======================================================
-[{}]
-empty = true
-
-[/usr/{ucb/{ex,edit},lib/{ex?.?*,how_ex}}]
-key=val
-
-[*.{,txt,md,tex,\,}]
-key=val
-
-[*{-4..3}/***/*.py]
-key=val
-
-[*.{js}]
-key=val
-
-------------------------------------------------------
-
 (document
   (section
     (section_name
-      (brace_expansion))
-    (pair
-      key: (identifier)
-      value: (boolean)))
+      (character)
+      (path_separator)))
+  (section
+    (section_name
+      (character)
+      (path_separator)
+      (character)))
   (section
     (section_name
       (path_separator)
       (character)
-      (character)
-      (character)
       (path_separator)
-      (brace_expansion
-        (expansion_string
-          (character)
-          (character)
-          (character)
-          (path_separator)
-          (brace_expansion
-            (expansion_string
-              (character)
-              (character))
-            (expansion_string
-              (character)
-              (character)
-              (character)
-              (character))))
-        (expansion_string
-          (character)
-          (character)
-          (character)
-          (path_separator)
-          (brace_expansion
-            (expansion_string
-              (character)
-              (character)
-              (wildcard_single_character)
-              (character)
-              (wildcard_single_character)
-              (wildcard_characters))
-            (expansion_string
-              (character)
-              (character)
-              (character)
-              (character)
-              (character)
-              (character))))))
-    (pair
-      key: (identifier)
-      value: (unknown)))
+      (character))))
+
+======================================================
+Back slash
+======================================================
+[a\b\c]
+------------------------------------------------------
+(document
+  (section
+    (section_name
+      (character)
+      (character)
+      (character)
+      (character)
+      (character))))
+
+======================================================
+Wildcards
+======================================================
+[*.py]
+[*.log_??]
+[src/**/*.c]
+[\*\?]
+------------------------------------------------------
+(document
   (section
     (section_name
       (wildcard_characters)
       (character)
-      (brace_expansion
-        (expansion_string
-          (character)
-          (character)
-          (character))
-        (expansion_string
-          (character)
-          (character))
-        (expansion_string
-          (character)
-          (character)
-          (character))
-        (expansion_string
-          (escaped_character))))
-    (pair
-      key: (identifier)
-      value: (unknown)))
+      (character)
+      (character)))
   (section
     (section_name
       (wildcard_characters)
-      (integer_range
-        start: (integer)
-        end: (integer))
+      (character)
+      (character)
+      (character)
+      (character)
+      (character)
+      (wildcard_single_character)
+      (wildcard_single_character)))
+  (section
+    (section_name
+      (character)
+      (character)
+      (character)
       (path_separator)
       (wildcard_any_characters)
-      (wildcard_characters)
       (path_separator)
       (wildcard_characters)
       (character)
-      (character)
-      (character))
-    (pair
-      key: (identifier)
-      value: (unknown)))
+      (character)))
   (section
     (section_name
-      (wildcard_characters)
-      (character)
-      (brace_expansion
-        (expansion_string
-          (character)
-          (character))))
-    (pair
-      key: (identifier)
-      value: (unknown))))
-
-======================================================
-Integer Range
-======================================================
-[{10..2}]
-[{1..-20}]
-[{-10..2}]
-[{-1..-20}]
-------------------------------------------------------
-(document
-  (section
-    (section_name
-      (integer_range
-        start: (integer)
-        end: (integer))))
-  (section
-    (section_name
-      (integer_range
-        start: (integer)
-        end: (integer))))
-  (section
-    (section_name
-      (integer_range
-        start: (integer)
-        end: (integer))))
-  (section
-    (section_name
-      (integer_range
-        start: (integer)
-        end: (integer)))))
-
-======================================================
-Brace expansions with integers
-======================================================
-[{10a}]
-[{-3a}]
-[{-3b,c}]
-[{30,-44,5}]
-------------------------------------------------------
-
-(document
-  (section
-    (section_name
-      (brace_expansion
-        (expansion_string
-          (character)
-          (character)
-          (character)))))
-  (section
-    (section_name
-      (brace_expansion
-        (expansion_string
-          (character)
-          (character)
-          (character)))))
-  (section
-    (section_name
-      (brace_expansion
-        (expansion_string
-          (character)
-          (character)
-          (character))
-        (expansion_string
-          (character)))))
-  (section
-    (section_name
-      (brace_expansion
-        (expansion_string
-          (character)
-          (character))
-        (expansion_string
-          (character)
-          (character)
-          (character))
-        (expansion_string
-          (character))))))
+      (escaped_character)
+      (escaped_character)))
+  )
 
 ======================================================
 Without ending new line
@@ -417,3 +314,19 @@ Empty file
 
 ------------------------------------------------------
 (document)
+
+======================================================
+New line in section name
+:error
+======================================================
+[fai
+l]
+end_of_line = lf
+------------------------------------------------------
+
+======================================================
+Empty section name
+:error
+======================================================
+[]
+------------------------------------------------------

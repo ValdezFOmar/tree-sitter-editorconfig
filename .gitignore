@@ -31,6 +31,7 @@ dist/
 
 # Example dirs
 /examples/*/
+editorconfig-files/
 
 # Grammar volatiles
 *.wasm

@@ -21,6 +21,7 @@ module.exports = grammar({
   externals: $ => [
     $._end_of_file,
     $._integer_range_start,
+    $._key_name_trimmed,
     $._error_sentinel, // Not used for grammar, only for scanner
   ],
 
@@ -84,7 +85,7 @@ module.exports = grammar({
 
     pair: $ =>
       seq(
-        field('key', alias(/[^;#=\s\[][^=\n]*/, $.identifier)),
+        field('key', alias($._key_name_trimmed, $.identifier)),
         '=',
         /[ \t]*/, // Eat all the leading white-space
         field('value', $._value),

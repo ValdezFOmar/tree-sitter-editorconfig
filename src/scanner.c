@@ -6,12 +6,12 @@ enum TokenType {
     ERROR_SENTINEL,
 };
 
-static bool is_digit(int32_t character)
+static inline bool is_digit(int32_t character)
 {
     return character >= '0' && character <= '9';
 }
 
-static bool parse_integer_range(TSLexer *lexer, const bool *valid_symbols)
+static inline bool parse_integer_range(TSLexer *lexer, const bool *valid_symbols)
 {
     int32_t previous = lexer->lookahead;
     lexer->advance(lexer, false);
@@ -21,7 +21,6 @@ static bool parse_integer_range(TSLexer *lexer, const bool *valid_symbols)
     }
 
     while (is_digit(lexer->lookahead)) {
-        previous = lexer->lookahead;
         lexer->advance(lexer, false);
     }
     // Integer ends here, but keep parsing to see if its a valid integer range
@@ -45,23 +44,24 @@ bool tree_sitter_editorconfig_external_scanner_scan(
         // Tree-sitter is in error correction mode, don't parse anything
         return false;
     }
-    if (valid_symbols[END_OF_FILE]) {
-        if (!lexer->eof(lexer)) {
-            return false;
-        }
+
+    if (valid_symbols[END_OF_FILE] && lexer->eof(lexer)) {
         lexer->advance(lexer, false);
         lexer->mark_end(lexer);
         lexer->result_symbol = END_OF_FILE;
         return true;
     }
-    const int32_t first_char = lexer->lookahead;
-    if (valid_symbols[INTEGER_RANGE_START] && (first_char == '-' || is_digit(first_char))) {
+
+    const int32_t next_char = lexer->lookahead;
+
+    if (valid_symbols[INTEGER_RANGE_START] && (next_char == '-' || is_digit(next_char))) {
         return parse_integer_range(lexer, valid_symbols);
     }
+
     return false;
 }
 
-void *tree_sitter_editorconfig_external_scanner_create()
+void *tree_sitter_editorconfig_external_scanner_create(void)
 {
     return NULL;
 }

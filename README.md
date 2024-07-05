@@ -7,7 +7,6 @@ The parser tries to be complaint with version 0.16.0 of the [specification][edit
 
 # TODO
 
-- [ ] Format code on push/pull request/merge
 - [ ] Test against [real-world examples][config-collection] on CI
 
 [ci-badge]: https://github.com/ValdezFOmar/tree-sitter-editorconfig/actions/workflows/ci.yml/badge.svg

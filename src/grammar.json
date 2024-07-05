@@ -387,8 +387,8 @@
           "content": {
             "type": "ALIAS",
             "content": {
-              "type": "PATTERN",
-              "value": "[^;#=\\s\\[][^=\\n]*"
+              "type": "SYMBOL",
+              "name": "_key_name_trimmed"
             },
             "named": true,
             "value": "identifier"
@@ -611,7 +611,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "_error_sentinel"
+      "name": "_key_name_trimmed"
     }
   ],
   "inline": [],

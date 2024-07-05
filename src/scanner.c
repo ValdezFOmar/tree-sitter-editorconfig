@@ -4,7 +4,6 @@ enum TokenType {
     END_OF_FILE,
     INTEGER_RANGE_START,
     KEY_NAME_TRIMMED,
-    ERROR_SENTINEL,
 };
 
 static inline bool is_digit(int32_t character)
@@ -94,7 +93,8 @@ static inline bool parse_integer_range(TSLexer *lexer)
 bool tree_sitter_editorconfig_external_scanner_scan(
     void *payload, TSLexer *lexer, const bool *valid_symbols)
 {
-    if (valid_symbols[ERROR_SENTINEL]) {
+    if (valid_symbols[END_OF_FILE] && valid_symbols[KEY_NAME_TRIMMED] &&
+        valid_symbols[INTEGER_RANGE_START]) {
         // Tree-sitter is in error correction mode, don't parse anything
         return false;
     }

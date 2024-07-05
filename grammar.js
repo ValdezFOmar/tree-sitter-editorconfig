@@ -22,7 +22,6 @@ module.exports = grammar({
     $._end_of_file,
     $._integer_range_start,
     $._key_name_trimmed,
-    $._error_sentinel, // Not used for grammar, only for scanner
   ],
 
   extras: _ => [/[ \t]/],

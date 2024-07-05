@@ -10,7 +10,7 @@ The parser tries to be complaint with version 0.16.0 of the [specification][edit
 - [ ] Format code on push/pull request/merge
 - [ ] Test against [real-world examples][config-collection] on CI
 
-[ci-badge]: https://img.shields.io/github/actions/workflow/status/ValdezFOmar/tree-sitter-editorconfig/ci.yml?logo=github&label=CI
+[ci-badge]: https://github.com/ValdezFOmar/tree-sitter-editorconfig/actions/workflows/ci.yml/badge.svg
 [ci-workflow]: https://github.com/ValdezFOmar/tree-sitter-editorconfig/actions/workflows/ci.yml
 [editorconfig]: https://editorconfig.org/
 [editorconfig-spec]: https://spec.editorconfig.org/#glob-expressions

@@ -18,11 +18,7 @@ const NEWLINE = /\r?\n/;
 module.exports = grammar({
   name: 'editorconfig',
 
-  externals: $ => [
-    $._end_of_file,
-    $._integer_range_start,
-    $._key_name_trimmed,
-  ],
+  externals: $ => [$._end_of_file, $._integer_range_start, $._key_name_trimmed],
 
   extras: _ => [/[ \t]/],
   word: $ => $._anything,

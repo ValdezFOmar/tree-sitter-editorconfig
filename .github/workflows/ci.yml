@@ -76,7 +76,7 @@ jobs:
         if: steps.scanner-check.outputs.changed == 'true'
 
   format-check-scanner:
-    name: Format check
+    name: Format check scanner.c
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -89,6 +89,7 @@ jobs:
           include-regex: '^src/scanner\.c$'
 
   format-check-grammar:
+    name: Format check grammar.js
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

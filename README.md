@@ -1,11 +1,17 @@
 # tree-sitter-editorconfig
 
-Grammar for [`.editorconfig`](https://editorconfig.org/) files.
-The parser tries to be complaint with version 0.16.0 of the [specification](https://spec.editorconfig.org/#glob-expressions).
+[![CI][ci-badge]][ci-workflow]
+
+Grammar for [`.editorconfig`][editorconfig] files.
+The parser tries to be complaint with version 0.16.0 of the [specification][editorconfig-spec].
 
 # TODO
 
-- [X] Test against [real-world examples](https://github.com/editorconfig/editorconfig/wiki/Projects-Using-EditorConfig)
-- [X] Lint and format code
-- [ ] CI integration
-- [ ] Editor integration
+- [ ] Format code on push/pull request/merge
+- [ ] Test against [real-world examples][config-collection] on CI
+
+[ci-badge]: https://img.shields.io/github/actions/workflow/status/ValdezFOmar/tree-sitter-editorconfig/ci.yml?logo=github&label=CI
+[ci-workflow]: https://github.com/ValdezFOmar/tree-sitter-editorconfig/actions/workflows/ci.yml
+[editorconfig]: https://editorconfig.org/
+[editorconfig-spec]: https://spec.editorconfig.org/#glob-expressions
+[config-collection]: https://github.com/editorconfig/editorconfig/wiki/Projects-Using-EditorConfig

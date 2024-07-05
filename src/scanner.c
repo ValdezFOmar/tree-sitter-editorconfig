@@ -24,7 +24,7 @@ static inline bool is_newline(int32_t character)
 
 /// Parse the name of the key in a pair, without including trainling white space.
 /// See 'Key-Value Pair' in: https://spec.editorconfig.org/#file-format
-static inline bool parse_key_name(TSLexer *lexer, const bool *valid_symbols)
+static inline bool parse_key_name(TSLexer *lexer)
 {
     while (is_space(lexer->lookahead)) {
         lexer->advance(lexer, true);
@@ -65,7 +65,7 @@ static inline bool parse_key_name(TSLexer *lexer, const bool *valid_symbols)
     return true;
 }
 
-static inline bool parse_integer_range(TSLexer *lexer, const bool *valid_symbols)
+static inline bool parse_integer_range(TSLexer *lexer)
 {
     int32_t previous = lexer->lookahead;
     lexer->advance(lexer, false);
@@ -107,13 +107,13 @@ bool tree_sitter_editorconfig_external_scanner_scan(
     }
 
     if (valid_symbols[KEY_NAME_TRIMMED]) {
-        return parse_key_name(lexer, valid_symbols);
+        return parse_key_name(lexer);
     }
 
     const int32_t next_char = lexer->lookahead;
 
     if (valid_symbols[INTEGER_RANGE_START] && (next_char == '-' || is_digit(next_char))) {
-        return parse_integer_range(lexer, valid_symbols);
+        return parse_integer_range(lexer);
     }
 
     return false;

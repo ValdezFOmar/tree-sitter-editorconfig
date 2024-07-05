@@ -18,11 +18,7 @@ const NEWLINE = /\r?\n/;
 module.exports = grammar({
   name: 'editorconfig',
 
-  externals: $ => [
-    $._end_of_file,
-    $._integer_range_start,
-    $._error_sentinel, // Not used for grammar, only for scanner
-  ],
+  externals: $ => [$._end_of_file, $._integer_range_start, $._key_name_trimmed],
 
   extras: _ => [/[ \t]/],
   word: $ => $._anything,
@@ -84,7 +80,7 @@ module.exports = grammar({
 
     pair: $ =>
       seq(
-        field('key', alias(/[^;#=\s\[][^=\n]*/, $.identifier)),
+        field('key', alias($._key_name_trimmed, $.identifier)),
         '=',
         /[ \t]*/, // Eat all the leading white-space
         field('value', $._value),

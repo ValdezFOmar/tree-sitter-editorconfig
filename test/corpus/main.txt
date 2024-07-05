@@ -124,7 +124,7 @@ Unsupported keys and values with spaces
 [a]
 # space should not matter
   my_custom_key = myval
-key with spaces = value with spaces
+key with spaces     = value with spaces
     This [ also counts = also this =
 charset = utf-8
 key = # this is not a comment

@@ -83,7 +83,7 @@ module.exports = grammar({
         field('key', alias($._key_name_trimmed, $.identifier)),
         '=',
         /[ \t]*/, // Eat all the leading white-space
-        field('value', $._value),
+        field('value', optional($._value)),
         $._newline,
       ),
 

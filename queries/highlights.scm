@@ -33,7 +33,8 @@
 (escaped_character) @string.special
 
 (pair
-  key: (identifier) @property)
+  key: (identifier) @property
+  value: (_)? @string)
 
 (boolean) @boolean
 (integer) @number

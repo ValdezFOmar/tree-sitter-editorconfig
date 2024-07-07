@@ -12,5 +12,5 @@ The parser tries to be complaint with version 0.16.0 of the [specification][edit
 [ci-badge]: https://github.com/ValdezFOmar/tree-sitter-editorconfig/actions/workflows/ci.yml/badge.svg
 [ci-workflow]: https://github.com/ValdezFOmar/tree-sitter-editorconfig/actions/workflows/ci.yml
 [editorconfig]: https://editorconfig.org/
-[editorconfig-spec]: https://spec.editorconfig.org/#glob-expressions
+[editorconfig-spec]: https://spec.editorconfig.org/
 [config-collection]: https://github.com/editorconfig/editorconfig/wiki/Projects-Using-EditorConfig

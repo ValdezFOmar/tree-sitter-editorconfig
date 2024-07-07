@@ -54,6 +54,9 @@ jobs:
         uses: tree-sitter/parser-test-action@v2
         with:
           test-rust: ${{runner.os == 'Linux'}}
+      - name: Parse examples
+        run: tree-sitter parse --stat examples/.editorconfig examples/*.editorconfig
+
   fuzz:
     name: Fuzz scanner
     runs-on: ubuntu-latest

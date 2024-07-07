@@ -44,7 +44,7 @@
     "build-wasm": "tree-sitter build --wasm",
     "test": "tree-sitter test",
     "parse": "tree-sitter parse",
-    "parse-configs": "tree-sitter parse --quiet --stat editorconfig-files/.editorconfig*",
+    "parse-configs": "tree-sitter parse --quiet --stat editorconfig-files/*.editorconfig",
     "format": "npx prettier --write grammar.js",
     "check-format": "npx prettier --check grammar.js",
     "state": "tree-sitter generate --report-states-for-rule -",

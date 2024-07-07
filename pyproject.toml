@@ -27,3 +27,15 @@ core = ["tree-sitter~=0.21"]
 [tool.cibuildwheel]
 build = "cp38-*"
 build-frontend = "build"
+
+[tool.pyright]
+typeCheckingMode = "standard"
+
+[tool.black]
+line-length = 100
+skip-string-normalization = true
+
+[tool.isort]
+profile = 'black'
+line_length = 100
+skip_gitignore = true

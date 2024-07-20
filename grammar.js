@@ -92,37 +92,19 @@ module.exports = grammar({
         // The spec allows the use of arbitrary values even if they are not supported
         // so this capture is used as a fallback if no supported values match
         alias($._anything, $.unknown),
-        alias(toCaseInsensitive('unset'), $.unset),
+        alias(/unset/i, $.unset),
         alias(/\d+/, $.integer),
+        // FIXME:
+        // spelling_language accepts specifying only the language part without the region:
+        // spelling_language = en
         alias(/[a-z]{2}-[A-Z]{2}/, $.spelling_language),
-        ...makeValues($.boolean, 'true', 'false', 'off'),
-        ...makeValues($.indent_style, 'space', 'tab'),
-        ...makeValues($.end_of_line, 'lf', 'cr', 'crlf'),
-        ...makeValues($.charset, 'latin1', 'utf-8', 'utf-16be', 'utf-16le', 'utf-8-bom'),
+        alias(choice(/true/i, /false/i, /off/i), $.boolean),
+        alias(choice(/space/i, /tab/i), $.indent_style),
+        alias(choice(/lf/i, /cr/i, /crlf/i), $.end_of_line),
+        alias(choice(/latin1/i, /utf-8/i, /utf-16be/i, /utf-16le/i, /utf-8-bom/i), $.charset),
       ),
 
     _anything: _ => /.*\S/,
     _newline: $ => choice(NEWLINE, $._end_of_file),
   },
 });
-
-/**
- * @param {SymbolRule<string>} namedNode The name of the node to alias these values
- * @param {...string} values Supported values defined in the spec
- */
-function makeValues(namedNode, ...values) {
-  return values.map(v => alias(toCaseInsensitive(v), namedNode));
-}
-
-/**
- * @param {string} string String to make case insensitive
- * @returns {RegExp} Case insensitive regex
- */
-function toCaseInsensitive(string) {
-  const alphaChar = /[a-zA-Z]/;
-  const characters = string.split('');
-  const upperLowerChars = characters.map(char =>
-    alphaChar.test(char) ? '[' + char.toLowerCase() + char.toUpperCase() + ']' : char,
-  );
-  return new RegExp(upperLowerChars.join(''));
-}

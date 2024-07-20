@@ -440,7 +440,8 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "[uU][nN][sS][eE][tT]"
+            "value": "unset",
+            "flags": "i"
           },
           "named": true,
           "value": "unset"
@@ -466,8 +467,24 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "[tT][rR][uU][eE]"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "true",
+                "flags": "i"
+              },
+              {
+                "type": "PATTERN",
+                "value": "false",
+                "flags": "i"
+              },
+              {
+                "type": "PATTERN",
+                "value": "off",
+                "flags": "i"
+              }
+            ]
           },
           "named": true,
           "value": "boolean"
@@ -475,26 +492,19 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "[fF][aA][lL][sS][eE]"
-          },
-          "named": true,
-          "value": "boolean"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "[oO][fF][fF]"
-          },
-          "named": true,
-          "value": "boolean"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "[sS][pP][aA][cC][eE]"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "space",
+                "flags": "i"
+              },
+              {
+                "type": "PATTERN",
+                "value": "tab",
+                "flags": "i"
+              }
+            ]
           },
           "named": true,
           "value": "indent_style"
@@ -502,35 +512,24 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "[tT][aA][bB]"
-          },
-          "named": true,
-          "value": "indent_style"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "[lL][fF]"
-          },
-          "named": true,
-          "value": "end_of_line"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "[cC][rR]"
-          },
-          "named": true,
-          "value": "end_of_line"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "[cC][rR][lL][fF]"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "lf",
+                "flags": "i"
+              },
+              {
+                "type": "PATTERN",
+                "value": "cr",
+                "flags": "i"
+              },
+              {
+                "type": "PATTERN",
+                "value": "crlf",
+                "flags": "i"
+              }
+            ]
           },
           "named": true,
           "value": "end_of_line"
@@ -538,44 +537,34 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "[lL][aA][tT][iI][nN]1"
-          },
-          "named": true,
-          "value": "charset"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "[uU][tT][fF]-8"
-          },
-          "named": true,
-          "value": "charset"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "[uU][tT][fF]-16[bB][eE]"
-          },
-          "named": true,
-          "value": "charset"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "[uU][tT][fF]-16[lL][eE]"
-          },
-          "named": true,
-          "value": "charset"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "[uU][tT][fF]-8-[bB][oO][mM]"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "latin1",
+                "flags": "i"
+              },
+              {
+                "type": "PATTERN",
+                "value": "utf-8",
+                "flags": "i"
+              },
+              {
+                "type": "PATTERN",
+                "value": "utf-16be",
+                "flags": "i"
+              },
+              {
+                "type": "PATTERN",
+                "value": "utf-16le",
+                "flags": "i"
+              },
+              {
+                "type": "PATTERN",
+                "value": "utf-8-bom",
+                "flags": "i"
+              }
+            ]
           },
           "named": true,
           "value": "charset"

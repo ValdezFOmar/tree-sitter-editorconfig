@@ -14,13 +14,14 @@
 // @ts-check
 
 const NEWLINE = /\r?\n/;
+const WHITE_SPACE = /[ \t]/
 
 module.exports = grammar({
   name: 'editorconfig',
 
   externals: $ => [$._end_of_file, $._integer_range_start, $._key_name_trimmed],
 
-  extras: _ => [/[ \t]/],
+  extras: _ => [WHITE_SPACE],
   word: $ => $._anything,
 
   rules: {
@@ -82,7 +83,7 @@ module.exports = grammar({
       seq(
         field('key', alias($._key_name_trimmed, $.identifier)),
         '=',
-        /[ \t]*/, // Eat all the leading white-space
+        token(repeat(WHITE_SPACE)), // Eat all the leading white-space
         field('value', optional($._value)),
         $._newline,
       ),

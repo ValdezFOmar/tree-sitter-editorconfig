@@ -399,8 +399,14 @@
           "value": "="
         },
         {
-          "type": "PATTERN",
-          "value": "[ \\t]*"
+          "type": "TOKEN",
+          "content": {
+            "type": "REPEAT",
+            "content": {
+              "type": "PATTERN",
+              "value": "[ \\t]"
+            }
+          }
         },
         {
           "type": "FIELD",

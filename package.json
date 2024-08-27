@@ -4,6 +4,7 @@
   "description": "Editorconfig grammar for tree-sitter",
   "repository": "github:ValdezFOmar/tree-sitter-editorconfig",
   "license": "MIT",
+  "type": "module",
   "main": "bindings/node",
   "types": "bindings/node",
   "keywords": [

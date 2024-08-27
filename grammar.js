@@ -10,7 +10,7 @@
 const NEWLINE = /\r?\n/;
 const WHITE_SPACE = /[ \t]/;
 
-module.exports = grammar({
+export default grammar({
   name: 'editorconfig',
 
   externals: $ => [$._end_of_file, $._integer_range_start, $._key_name_trimmed],

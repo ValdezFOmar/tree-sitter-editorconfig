@@ -2,6 +2,7 @@
 name = "tree-sitter-editorconfig"
 description = "Editorconfig grammar for tree-sitter"
 version = "1.0.2"
+authors = ["Omar Valdez <omarantoniovaldezf2@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 keywords = ["incremental", "parsing", "tree-sitter", "editorconfig"]
@@ -21,3 +22,6 @@ tree-sitter-language = "0.1.0"
 
 [build-dependencies]
 cc = "1.0.87"
+
+[dev-dependencies]
+tree-sitter = "0.23.0"

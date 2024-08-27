@@ -27,15 +27,15 @@ updates:
       npm:
         patterns: ["*"]
 
-  # - package-ecosystem: cargo
-  #   directory: /
-  #   schedule:
-  #     interval: weekly
-  #     day: sunday
-  #   commit-message:
-  #     prefix: build(deps)
-  #   labels:
-  #     - dependencies
-  #   groups:
-  #     cargo:
-  #       patterns: ["*"]
+  - package-ecosystem: cargo
+    directory: /
+    schedule:
+      interval: weekly
+      day: sunday
+    commit-message:
+      prefix: build(deps)
+    labels:
+      - dependencies
+    groups:
+      cargo:
+        patterns: ["*"]

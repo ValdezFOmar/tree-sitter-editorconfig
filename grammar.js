@@ -7,6 +7,20 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+// TODO:
+// - Try to reimplement some patterns here and get rid of the external scanner
+// - Match spelling_language supported language codes, I'm not sure about regions
+// - Restrict specific values to specific keys, matching keys in a case insensitive manner
+//   - Restrict
+//     - New: indent_size node
+//     - indent_style
+//     - spelling_language
+//     - end_of_line
+//     - charset
+//   - Keep the same
+//     - integer, boolean, unset: This ones are so ubiquitous that I don't think it will cause problems
+// pair => especific pairs + generic pair
+
 const NEWLINE = /\r?\n/;
 const WHITE_SPACE = /[ \t]/;
 

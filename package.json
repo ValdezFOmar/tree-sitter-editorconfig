@@ -1,12 +1,12 @@
 {
   "name": "tree-sitter-editorconfig",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Editorconfig grammar for tree-sitter",
   "repository": "github:ValdezFOmar/tree-sitter-editorconfig",
   "license": "MIT",
-  "type": "module",
   "main": "bindings/node",
   "types": "bindings/node",
+  "type": "module",
   "keywords": [
     "incremental",
     "parsing",

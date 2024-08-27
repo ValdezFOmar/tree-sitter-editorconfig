@@ -28,6 +28,7 @@
   "devDependencies": {
     "prebuildify": "^6.0.1",
     "prettier": "3.3.3",
+    "tree-sitter": "^0.21.1",
     "tree-sitter-cli": "^0.22.6"
   },
   "peerDependencies": {
@@ -45,9 +46,7 @@
     "test": "node --test bindings/node/*_test.js",
     "parse-configs": "tree-sitter parse --quiet --stat editorconfig-files/*.editorconfig",
     "format": "npx prettier --write grammar.js",
-    "check-format": "npx prettier --check grammar.js",
-    "state": "tree-sitter generate --report-states-for-rule -",
-    "total-state": "npm run state 2>&1 >/dev/null | awk '{s+=$2} END {print \"Total State:\", s}'"
+    "check-format": "npx prettier --check grammar.js"
   },
   "prettier": {
     "trailingComma": "all",

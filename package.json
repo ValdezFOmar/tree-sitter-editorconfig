@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-editorconfig",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Editorconfig grammar for tree-sitter",
   "repository": "github:ValdezFOmar/tree-sitter-editorconfig",
   "license": "MIT",

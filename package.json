@@ -44,7 +44,7 @@
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
     "test": "node --test bindings/node/*_test.js",
-    "parse-configs": "tree-sitter parse --quiet --stat editorconfig-files/*.editorconfig",
+    "parse-configs": "tree-sitter parse --quiet --stat examples/files/*.editorconfig",
     "format": "npx prettier --write grammar.js",
     "check-format": "npx prettier --check grammar.js"
   },

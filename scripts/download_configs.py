@@ -3,11 +3,12 @@ import sys
 import time
 from collections.abc import Iterable
 from pathlib import Path
-from pathlib import PurePosixPath as UrlPath
 from urllib.parse import urlparse
 
 import bs4
 import requests
+
+ROOT = Path(__file__).parent.parent
 
 
 def print_error(r: requests.Response) -> None:
@@ -59,14 +60,14 @@ def main() -> int:
 
     a_tags = get_html(configs_list).find_all('a', string='source', href=True)
 
-    output_dir = Path(__file__).parent.parent / 'editorconfig-files'
+    output_dir = ROOT / 'examples' / 'files'
     output_dir.mkdir(parents=True, exist_ok=True)
     wait_time = 0.5
 
     for url in transform_urls(tag['href'] for tag in a_tags):
         repo_name = url.split('/')[-3]
         time.sleep(wait_time + wait_time * random.random())
-        download(url, output_dir / (repo_name + '.editorconfig'))
+        download(url, output_dir / f'{repo_name}.editorconfig')
 
     return 0
 

@@ -31,11 +31,12 @@ build-frontend = "build"
 [tool.pyright]
 typeCheckingMode = "standard"
 
-[tool.black]
+[tool.ruff]
 line-length = 100
-skip-string-normalization = true
+include = [
+  "scripts/*.py",
+]
 
-[tool.isort]
-profile = 'black'
-line_length = 100
-skip_gitignore = true
+[tool.ruff.format]
+quote-style = "single"
+line-ending = "lf"

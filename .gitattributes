@@ -9,3 +9,4 @@ binding.gyp linguist-generated
 setup.py linguist-generated
 Makefile linguist-generated
 Package.swift linguist-generated
+CMakeLists.txt linguist-generated

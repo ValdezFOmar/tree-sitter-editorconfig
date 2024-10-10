@@ -1,9 +1,3 @@
-/**
- * @file EditorConfig specification v0.16.0 grammar for tree-sitter
- * @author Omar Valdez <omarantoniovaldezf2@gmail.com>
- * @license MIT
- */
-
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 

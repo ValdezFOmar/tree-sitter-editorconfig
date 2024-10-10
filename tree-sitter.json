@@ -18,6 +18,12 @@
     "version": "1.0.3",
     "license": "MIT",
     "description": "Editorconfig grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Omar Valdez",
+        "email": "omarantoniovaldezf2@gmail.com"
+      }
+    ],
     "links": {
       "repository": "https://github.com/ValdezFOmar/tree-sitter-editorconfig"
     }

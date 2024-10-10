@@ -29,7 +29,7 @@
     "prebuildify": "^6.0.1",
     "prettier": "3.3.3",
     "tree-sitter": "^0.21.1",
-    "tree-sitter-cli": "^0.23.0"
+    "tree-sitter-cli": "^0.24.3"
   },
   "peerDependencies": {
     "tree-sitter": "^0.21.0"
@@ -55,16 +55,5 @@
     "semi": true,
     "singleQuote": true,
     "arrowParens": "avoid"
-  },
-  "tree-sitter": [
-    {
-      "scope": "source.editorconfig",
-      "injection-regex": "^editorconfig$",
-      "file-types": [
-        ".editorconfig",
-        "editorconfig"
-      ],
-      "highlights": "queries/highlights.scm"
-    }
-  ]
+  }
 }

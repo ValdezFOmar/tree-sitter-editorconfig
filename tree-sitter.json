@@ -1,0 +1,33 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "editorconfig",
+      "camelcase": "Editorconfig",
+      "scope": "source.editorconfig",
+      "path": ".",
+      "file-types": [
+        ".editorconfig",
+        "editorconfig"
+      ],
+      "highlights": "queries/highlights.scm",
+      "injection-regex": "^editorconfig$"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.2",
+    "license": "MIT",
+    "description": "Editorconfig grammar for tree-sitter",
+    "links": {
+      "repository": "https://github.com/ValdezFOmar/tree-sitter-editorconfig"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}

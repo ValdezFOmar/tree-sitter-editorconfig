@@ -7,10 +7,10 @@ The parser tries to be complaint with version 0.16.0 of the [specification][edit
 
 ## References
 
-- EditorConfig [specification][editorconfig-spec]
-- EditorConfig [Properties][properties]
+- editorconfig [specification][editorconfig-spec]
+- editorconfig [Properties][properties]
 - [`.editorconfig` files collection][config-collection] on the editorconfig wiki
-- [Testings][core-test] for EditorConfig Core
+- [Testings][core-test] for editorconfig Core
 
 ## Editors
 

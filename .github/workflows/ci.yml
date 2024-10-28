@@ -46,7 +46,7 @@ jobs:
         with:
           test-rust: ${{runner.os == 'Linux'}}
       - name: Parse examples
-        run: tree-sitter parse --stat examples/.editorconfig examples/*.editorconfig
+        run: tree-sitter parse --quiet --stat examples/*.editorconfig
 
   fuzz:
     name: Fuzz scanner

@@ -13,7 +13,7 @@ const WHITE_SPACE = /[ \t]/;
 export default grammar({
   name: 'editorconfig',
 
-  externals: $ => [$._end_of_file, $._integer_range_start, $._key_name_trimmed],
+  externals: $ => [$._end_of_file, $._integer_range_start, $.identifier],
 
   extras: _ => [WHITE_SPACE],
   word: $ => $._anything,
@@ -75,7 +75,7 @@ export default grammar({
 
     pair: $ =>
       seq(
-        field('key', alias($._key_name_trimmed, $.identifier)),
+        field('key', $.identifier),
         '=',
         token(repeat(WHITE_SPACE)), // Eat all the leading white-space
         field('value', optional($._value)),

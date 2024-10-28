@@ -386,13 +386,8 @@
           "type": "FIELD",
           "name": "key",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_key_name_trimmed"
-            },
-            "named": true,
-            "value": "identifier"
+            "type": "SYMBOL",
+            "name": "identifier"
           }
         },
         {
@@ -615,7 +610,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "_key_name_trimmed"
+      "name": "identifier"
     }
   ],
   "inline": [],

@@ -3,7 +3,7 @@
 [![CI][ci-badge]][ci-workflow]
 
 Grammar for [`.editorconfig`][editorconfig] files.
-The parser tries to be complaint with version 0.16.0 of the [specification][editorconfig-spec].
+The parser tries to be complaint with version 0.17.2 of the [specification][editorconfig-spec].
 
 ## References
 

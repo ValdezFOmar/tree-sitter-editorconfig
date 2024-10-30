@@ -16,34 +16,43 @@ export default grammar({
   externals: $ => [$._end_of_file, $._integer_range_start, $.identifier],
 
   extras: _ => [WHITE_SPACE],
-  word: $ => $._anything,
 
   rules: {
-    document: $ => seq(alias(repeat($._line), $.preamble), repeat($.section)),
+    document: $ => seq(optional($.preamble), repeat($.section)),
 
-    comment: _ => /[#;].*/,
+    comment: $ => seq(/[#;].*/, $._eol),
+
     _line: $ => choice($.pair, $.comment, NEWLINE),
 
+    preamble: $ => repeat1($._line),
+
     section: $ => seq($._section_header, repeat($._line)),
-    _section_header: $ => seq('[', alias($._glob_expression, $.section_name), ']', $._newline),
+
+    _section_header: $ => seq('[', alias($._glob_expression, $.section_name), ']', $._eol),
 
     // https://spec.editorconfig.org/#glob-expressions
     _glob_expression: $ =>
       repeat1(
         choice(
-          alias('*', $.wildcard_characters),
-          alias('**', $.wildcard_any_characters),
-          alias('?', $.wildcard_single_character),
-          alias('/', $.path_separator),
-          alias(/[^?*/\n{}\[\]]/, $.character),
-          $.escaped_character,
+          $.character,
           $.integer_range,
+          $.path_separator,
           $.brace_expansion,
           $.character_choice,
+          $.escaped_character,
+          $.wildcard_characters,
+          $.wildcard_any_characters,
+          $.wildcard_single_character,
         ),
       ),
 
-    escaped_character: _ => token(seq('\\', token.immediate(/\W/))),
+    wildcard_characters: _ => '*',
+    wildcard_any_characters: _ => '**',
+    wildcard_single_character: _ => '?',
+    path_separator: _ => '/',
+    character: _ => /[^?*/\n{}\[\]]/,
+
+    escaped_character: _ => /\\\W/,
 
     // Empty strings are allowed
     brace_expansion: $ => seq('{', repeat(choice(',', $.expansion_string)), '}'),
@@ -79,27 +88,33 @@ export default grammar({
         '=',
         token(repeat(WHITE_SPACE)), // Eat all the leading white-space
         field('value', optional($._value)),
-        $._newline,
+        $._eol,
       ),
 
     _value: $ =>
       choice(
-        // The spec allows the use of arbitrary values even if they are not supported
-        // so this capture is used as a fallback if no supported values match
-        alias($._anything, $.unknown),
-        alias(/unset/i, $.unset),
-        alias(/\d+/, $.integer),
-        // FIXME:
-        // spelling_language accepts specifying only the language part without the region:
-        // spelling_language = en
-        alias(/[a-z]{2}-[A-Z]{2}/, $.spelling_language),
-        alias(choice(/true/i, /false/i, /off/i), $.boolean),
-        alias(choice(/space/i, /tab/i), $.indent_style),
-        alias(choice(/lf/i, /cr/i, /crlf/i), $.end_of_line),
-        alias(choice(/latin1/i, /utf-8/i, /utf-16be/i, /utf-16le/i, /utf-8-bom/i), $.charset),
+        $.unset,
+        $.unknown,
+        $.integer,
+        $.boolean,
+        $.charset,
+        $.end_of_line,
+        $.indent_style,
+        $.spelling_language,
       ),
 
-    _anything: _ => /.*\S/,
-    _newline: $ => choice(NEWLINE, $._end_of_file),
+    unset: _ => /unset/i,
+    integer: _ => /\d+/,
+    boolean: _ => /true|false|off/i,
+    end_of_line: _ => /lf|cr|crlf/i,
+    indent_style: _ => /space|tab/i,
+    spelling_language: _ => /[a-z]{2}-[A-Z]{2}/,
+    charset: _ => /latin1|utf-8|utf-16be|utf-16le|utf-8-bom/i,
+
+    // The spec allows the use of arbitrary values even if they are not supported
+    // so this capture is used as a fallback if no supported values match
+    unknown: _ => /.*\S/,
+
+    _eol: $ => choice(NEWLINE, $._end_of_file),
   },
 });

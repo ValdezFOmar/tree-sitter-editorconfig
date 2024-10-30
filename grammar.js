@@ -16,7 +16,6 @@ export default grammar({
   externals: $ => [
     $._end_of_file,
     $._integer_range_start,
-    $.identifier,
   ],
 
   inline: $ => [
@@ -132,9 +131,13 @@ export default grammar({
     spelling_language: _ => /[a-z]{2}-[A-Z]{2}/,
     charset: _ => /latin1|utf-8|utf-16be|utf-16le|utf-8-bom/i,
 
+    // Starts and ends with a non-whitespace character, with
+    // any character (including withespace) in the middle.
+    identifier: _ => /[^\s=#;\[]([^\n\r=]*[^\s=])?/,
+
     // The spec allows the use of arbitrary values even if they are not supported
     // so this capture is used as a fallback if no supported values match
-    unknown: _ => /.*\S/,
+    unknown: _ => /\S([^\n\r]*\S)?/,
 
     _eol: $ => choice(NEWLINE, $._end_of_file),
   },

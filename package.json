@@ -27,12 +27,11 @@
   },
   "devDependencies": {
     "prebuildify": "^6.0.1",
-    "prettier": "3.3.3",
     "tree-sitter": "^0.22.0",
     "tree-sitter-cli": "^0.24.3"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.21.0"
+    "tree-sitter": "^0.22.0"
   },
   "peerDependenciesMeta": {
     "tree-sitter": {
@@ -43,16 +42,6 @@
     "install": "node-gyp-build",
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
-    "test": "node --test bindings/node/*_test.js",
-    "format": "npx prettier --write grammar.js",
-    "check-format": "npx prettier --check grammar.js"
-  },
-  "prettier": {
-    "trailingComma": "all",
-    "tabWidth": 2,
-    "printWidth": 100,
-    "semi": true,
-    "singleQuote": true,
-    "arrowParens": "avoid"
+    "test": "node --test bindings/node/*_test.js"
   }
 }

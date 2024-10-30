@@ -128,7 +128,7 @@ export default grammar({
     boolean: _ => /true|false|off/i,
     end_of_line: _ => /lf|cr|crlf/i,
     indent_style: _ => /space|tab/i,
-    spelling_language: _ => /[a-z]{2}-[A-Z]{2}/,
+    spelling_language: _ => /[a-z]{2}(-[A-Z]{2})?/,
     charset: _ => /latin1|utf-8|utf-16be|utf-16le|utf-8-bom/i,
 
     // Starts and ends with a non-whitespace character, with

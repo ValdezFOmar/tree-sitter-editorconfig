@@ -470,7 +470,7 @@
     },
     "spelling_language": {
       "type": "PATTERN",
-      "value": "[a-z]{2}-[A-Z]{2}"
+      "value": "[a-z]{2}(-[A-Z]{2})?"
     },
     "charset": {
       "type": "PATTERN",

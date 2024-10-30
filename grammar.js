@@ -13,12 +13,24 @@ const WHITE_SPACE = /[ \t]/;
 export default grammar({
   name: 'editorconfig',
 
-  externals: $ => [$._end_of_file, $._integer_range_start, $.identifier],
+  externals: $ => [
+    $._end_of_file,
+    $._integer_range_start,
+    $.identifier,
+  ],
+
+  inline: $ => [
+    $._eol,
+    $._line,
+  ],
 
   extras: _ => [WHITE_SPACE],
 
   rules: {
-    document: $ => seq(optional($.preamble), repeat($.section)),
+    document: $ => seq(
+      optional($.preamble),
+      repeat($.section),
+    ),
 
     comment: $ => seq(/[#;].*/, $._eol),
 
@@ -28,23 +40,25 @@ export default grammar({
 
     section: $ => seq($._section_header, repeat($._line)),
 
-    _section_header: $ => seq('[', alias($._glob_expression, $.section_name), ']', $._eol),
+    _section_header: $ => seq(
+      '[',
+      alias($._glob_expression, $.section_name),
+      ']',
+      $._eol,
+    ),
 
     // https://spec.editorconfig.org/#glob-expressions
-    _glob_expression: $ =>
-      repeat1(
-        choice(
-          $.character,
-          $.integer_range,
-          $.path_separator,
-          $.brace_expansion,
-          $.character_choice,
-          $.escaped_character,
-          $.wildcard_characters,
-          $.wildcard_any_characters,
-          $.wildcard_single_character,
-        ),
-      ),
+    _glob_expression: $ => repeat1(choice(
+      $.character,
+      $.integer_range,
+      $.path_separator,
+      $.brace_expansion,
+      $.character_choice,
+      $.escaped_character,
+      $.wildcard_characters,
+      $.wildcard_any_characters,
+      $.wildcard_single_character,
+    )),
 
     wildcard_characters: _ => '*',
     wildcard_any_characters: _ => '**',
@@ -55,44 +69,49 @@ export default grammar({
     escaped_character: _ => /\\\W/,
 
     // Empty strings are allowed
-    brace_expansion: $ => seq('{', repeat(choice(',', $.expansion_string)), '}'),
+    brace_expansion: $ => seq(
+      '{',
+      repeat(choice(
+        ',',
+        $.expansion_string,
+      )),
+      '}'
+    ),
+
     expansion_string: $ => prec.left(repeat1(prec.right($._glob_expression))),
 
-    integer_range: $ =>
-      seq(
-        '{',
-        field('start', alias($._integer_range_start, $.integer)),
-        token.immediate('..'),
-        field('end', alias(token.immediate(/-?\d+/), $.integer)),
-        '}',
-      ),
+    integer_range: $ => seq(
+      '{',
+      field('start', alias($._integer_range_start, $.integer)),
+      token.immediate('..'),
+      field('end', alias(token.immediate(/-?\d+/), $.integer)),
+      '}',
+    ),
 
-    character_choice: $ => seq('[', $._character_choice_content, ']'),
+    character_choice: $ => seq(
+      '[',
+      optional($.negation),
+      repeat1(choice(
+        $.character_range,
+        $.escaped_character,
+        alias(/[^\]\r\n/]/, $.character),
+      )),
+      ']',
+    ),
 
-    _character_choice_content: $ =>
-      seq(
-        optional(alias(token.immediate('!'), $.negation)),
-        repeat1(choice($.character_range, $.escaped_character, alias(/[^\]\r\n/]/, $.character))),
-      ),
+    negation: _ => token.immediate('!'),
 
-    character_range: $ =>
-      seq(
-        field('start', alias(/[^\]\r\n/]/, $.character)),
-        token.immediate('-'),
-        field('end', alias(token.immediate(/\w/), $.character)),
-      ),
+    character_range: $ => seq(
+      field('start', alias(/[^\]\r\n/]/, $.character)),
+      token.immediate('-'),
+      field('end', alias(token.immediate(/\w/), $.character)),
+    ),
 
-    pair: $ =>
-      seq(
-        field('key', $.identifier),
-        '=',
-        token(repeat(WHITE_SPACE)), // Eat all the leading white-space
-        field('value', optional($._value)),
-        $._eol,
-      ),
-
-    _value: $ =>
-      choice(
+    pair: $ => seq(
+      field('key', $.identifier),
+      '=',
+      token(repeat(WHITE_SPACE)), // Eat all the leading white-space
+      field('value', optional(choice(
         $.unset,
         $.unknown,
         $.integer,
@@ -101,7 +120,9 @@ export default grammar({
         $.end_of_line,
         $.indent_style,
         $.spelling_language,
-      ),
+      ))),
+      $._eol,
+    ),
 
     unset: _ => /unset/i,
     integer: _ => /\d+/,

@@ -68,6 +68,11 @@
     }
   },
   {
+    "type": "comment",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "document",
     "named": true,
     "root": true,
@@ -337,10 +342,6 @@
   },
   {
     "type": "charset",
-    "named": true
-  },
-  {
-    "type": "comment",
     "named": true
   },
   {

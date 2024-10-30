@@ -59,6 +59,7 @@ indent_size = 4
 
 [d]
 max_line_length = off
+spelling_language = es
 ------------------------------------------------------
 
 (document
@@ -116,7 +117,10 @@ max_line_length = off
       (character))
     (pair
       key: (identifier)
-      value: (boolean))))
+      value: (boolean))
+    (pair
+      key: (identifier)
+      value: (spelling_language))))
 
 ======================================================
 Unsupported keys and values with spaces

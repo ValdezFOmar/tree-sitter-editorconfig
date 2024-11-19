@@ -9,7 +9,6 @@ version = "1.1.0"
 keywords = ["incremental", "parsing", "tree-sitter", "editorconfig"]
 classifiers = [
   "Intended Audience :: Developers",
-  "License :: OSI Approved :: MIT License",
   "Topic :: Software Development :: Compilers",
   "Topic :: Text Processing :: Linguistic",
   "Typing :: Typed",
@@ -28,16 +27,3 @@ core = ["tree-sitter~=0.22"]
 [tool.cibuildwheel]
 build = "cp39-*"
 build-frontend = "build"
-
-[tool.pyright]
-typeCheckingMode = "standard"
-
-[tool.ruff]
-line-length = 100
-include = [
-  "scripts/*.py",
-]
-
-[tool.ruff.format]
-quote-style = "single"
-line-ending = "lf"

@@ -15,24 +15,25 @@ insert_final_newline = true
 
 ------------------------------------------------------
 
-(document
+(editorconfig
   (preamble
     (comment)
     (comment)
     (pair
-      key: (identifier)
-      value: (boolean))
+      key: (property)
+      value: (string))
     (comment))
   (section
-    (section_name
-      (wildcard_characters))
+    (header
+      (section_name
+        (wildcard)))
     (pair
-      key: (identifier)
-      value: (end_of_line))
+      key: (property)
+      value: (string))
     (comment)
     (pair
-      key: (identifier)
-      value: (boolean))))
+      key: (property)
+      value: (string))))
 
 ======================================================
 Supported values
@@ -62,65 +63,65 @@ max_line_length = off
 spelling_language = es
 ------------------------------------------------------
 
-(document
+(editorconfig
   (preamble
     (pair
-      key: (identifier)
-      value: (boolean)))
+      key: (property)
+      value: (string)))
   (section
-    (section_name
-      (character))
+    (header
+      (section_name))
     (pair
-      key: (identifier)
-      value: (end_of_line))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (boolean))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (boolean))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (charset))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (spelling_language))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (integer)))
+      key: (property)
+      value: (string)))
   (section
-    (section_name
-      (character))
+    (header
+      (section_name))
     (pair
-      key: (identifier)
-      value: (end_of_line))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (indent_style))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (boolean)))
+      key: (property)
+      value: (string)))
   (section
-    (section_name
-      (character))
+    (header
+      (section_name))
     (pair
-      key: (identifier)
-      value: (end_of_line))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (indent_style))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (integer)))
+      key: (property)
+      value: (string)))
   (section
-    (section_name
-      (character))
+    (header
+      (section_name))
     (pair
-      key: (identifier)
-      value: (boolean))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (spelling_language))))
+      key: (property)
+      value: (string))))
 
 ======================================================
 Unsupported keys and values with spaces
@@ -135,26 +136,26 @@ key = # this is not a comment
 
 ------------------------------------------------------
 
-(document
+(editorconfig
   (section
-    (section_name
-      (character))
+    (header
+      (section_name))
     (comment)
     (pair
-      key: (identifier)
-      value: (unknown))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (unknown))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (unknown))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (charset))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (unknown))))
+      key: (property)
+      value: (string))))
 
 ======================================================
 Properties with an empty value
@@ -166,20 +167,21 @@ b =
  d =  
 spaces =     
 ------------------------------------------------------
-(document
+
+(editorconfig
   (section
-    (section_name
-      (character))
+    (header
+      (section_name))
     (pair
-      key: (identifier))
+      key: (property))
     (pair
-      key: (identifier))
+      key: (property))
     (pair
-      key: (identifier))
+      key: (property))
     (pair
-      key: (identifier))
+      key: (property))
     (pair
-      key: (identifier))))
+      key: (property))))
 
 ======================================================
 Comments
@@ -196,25 +198,25 @@ key ; = # value
 #
 ------------------------------------------------------
 
-(document
+(editorconfig
   (preamble
     (comment)
     (comment))
   (section
-    (section_name
-      (character))
+    (header
+      (section_name))
     (comment)
     (pair
-      key: (identifier)
-      value: (unknown))
+      key: (property)
+      value: (string))
     (comment))
   (section
-    (section_name
-      (character))
+    (header
+      (section_name))
     (comment)
     (pair
-      key: (identifier)
-      value: (unknown))
+      key: (property)
+      value: (string))
     (comment)))
 
 ======================================================
@@ -228,22 +230,22 @@ indent_style = sPAce
 
 ------------------------------------------------------
 
-(document
+(editorconfig
   (section
-    (section_name
-      (character))
+    (header
+      (section_name))
     (pair
-      key: (identifier)
-      value: (charset))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (end_of_line))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (boolean))
+      key: (property)
+      value: (string))
     (pair
-      key: (identifier)
-      value: (indent_style))))
+      key: (property)
+      value: (string))))
 
 ======================================================
 Directory Separator
@@ -252,36 +254,28 @@ Directory Separator
 [a/b]
 [/a/b]
 ------------------------------------------------------
-(document
+
+(editorconfig
   (section
-    (section_name
-      (character)
-      (path_separator)))
+    (header
+      (section_name)))
   (section
-    (section_name
-      (character)
-      (path_separator)
-      (character)))
+    (header
+      (section_name)))
   (section
-    (section_name
-      (path_separator)
-      (character)
-      (path_separator)
-      (character))))
+    (header
+      (section_name))))
 
 ======================================================
 Back slash
 ======================================================
 [a\b\c]
 ------------------------------------------------------
-(document
+
+(editorconfig
   (section
-    (section_name
-      (character)
-      (character)
-      (character)
-      (character)
-      (character))))
+    (header
+      (section_name))))
 
 ======================================================
 Wildcards
@@ -291,39 +285,28 @@ Wildcards
 [src/**/*.c]
 [\*\?]
 ------------------------------------------------------
-(document
+
+(editorconfig
   (section
-    (section_name
-      (wildcard_characters)
-      (character)
-      (character)
-      (character)))
+    (header
+      (section_name
+        (wildcard))))
   (section
-    (section_name
-      (wildcard_characters)
-      (character)
-      (character)
-      (character)
-      (character)
-      (character)
-      (wildcard_single_character)
-      (wildcard_single_character)))
+    (header
+      (section_name
+        (wildcard)
+        (wildcard)
+        (wildcard))))
   (section
-    (section_name
-      (character)
-      (character)
-      (character)
-      (path_separator)
-      (wildcard_any_characters)
-      (path_separator)
-      (wildcard_characters)
-      (character)
-      (character)))
+    (header
+      (section_name
+        (wildcard)
+        (wildcard))))
   (section
-    (section_name
-      (escaped_character)
-      (escaped_character)))
-  )
+    (header
+      (section_name
+        (escaped_character)
+        (escaped_character)))))
 
 ======================================================
 Without ending new line
@@ -331,18 +314,19 @@ Without ending new line
 root = true
 ------------------------------------------------------
 
-(document
+(editorconfig
   (preamble
     (pair
-      key: (identifier)
-      value: (boolean))))
+      key: (property)
+      value: (string))))
 
 ======================================================
 Empty file
 ======================================================
 
 ------------------------------------------------------
-(document)
+
+(editorconfig)
 
 ======================================================
 New line in section name
@@ -353,12 +337,16 @@ l]
 end_of_line = lf
 ------------------------------------------------------
 
+
+
 ======================================================
 Empty section name
 :error
 ======================================================
 []
 ------------------------------------------------------
+
+
 
 ======================================================
 Characters after section header
@@ -367,6 +355,8 @@ Characters after section header
 [a] key = value
 ------------------------------------------------------
 
+
+
 ======================================================
 Property without '=' and value
 :error
@@ -374,9 +364,13 @@ Property without '=' and value
 property
 ------------------------------------------------------
 
+
+
 ======================================================
 Comment after section header
 :error
 ======================================================
 [a] # Comment
 ------------------------------------------------------
+
+

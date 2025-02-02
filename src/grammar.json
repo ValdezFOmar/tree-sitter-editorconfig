@@ -521,5 +521,6 @@
     "_eol",
     "_line"
   ],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }

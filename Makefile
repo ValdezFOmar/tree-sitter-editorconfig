@@ -4,7 +4,7 @@ endif
 
 LANGUAGE_NAME := tree-sitter-editorconfig
 HOMEPAGE_URL := https://github.com/valdezfomar/tree-sitter-editorconfig
-VERSION := 1.1.1
+VERSION := 1.1.2
 
 # repository
 SRC_DIR := src

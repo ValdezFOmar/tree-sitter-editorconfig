@@ -6,25 +6,28 @@ Character choice
 [[[\]\-]]
 ------------------------------------------------------
 
-(document
+(editorconfig
   (section
-    (section_name
-      (character_choice
-        (character)
-        (character)
-        (character))))
+    (header
+      (section_name
+        (character_choice
+          (character)
+          (character)
+          (character)))))
   (section
-    (section_name
-      (character_choice
-        (character)
-        (character)
-        (character))))
+    (header
+      (section_name
+        (character_choice
+          (character)
+          (character)
+          (character)))))
   (section
-    (section_name
-      (character_choice
-        (character)
-        (escaped_character)
-        (escaped_character)))))
+    (header
+      (section_name
+        (character_choice
+          (character)
+          (escaped_character)
+          (escaped_character))))))
 
 ======================================================
 Character choice (Negated)
@@ -34,28 +37,28 @@ Character choice (Negated)
 [[![\]\-]]
 ------------------------------------------------------
 
-(document
+(editorconfig
   (section
-    (section_name
-      (character_choice
-        (negation)
-        (character)
-        (character)
-        (character))))
+    (header
+      (section_name
+        (character_choice
+          (character)
+          (character)
+          (character)))))
   (section
-    (section_name
-      (character_choice
-        (negation)
-        (character)
-        (character)
-        (character))))
+    (header
+      (section_name
+        (character_choice
+          (character)
+          (character)
+          (character)))))
   (section
-    (section_name
-      (character_choice
-        (negation)
-        (character)
-        (escaped_character)
-        (escaped_character)))))
+    (header
+      (section_name
+        (character_choice
+          (character)
+          (escaped_character)
+          (escaped_character))))))
 
 ======================================================
 Character range
@@ -66,35 +69,39 @@ Character range
 [[sa-e0]]
 ------------------------------------------------------
 
-(document
+(editorconfig
   (section
-    (section_name
-      (character_choice
-        (character_range
-          start: (character)
-          end: (character)))))
+    (header
+      (section_name
+        (character_choice
+          (character_range
+            start: (character)
+            end: (character))))))
   (section
-    (section_name
-      (character_choice
-        (character)
-        (character_range
-          start: (character)
-          end: (character)))))
+    (header
+      (section_name
+        (character_choice
+          (character)
+          (character_range
+            start: (character)
+            end: (character))))))
   (section
-    (section_name
-      (character_choice
-        (character_range
-          start: (character)
-          end: (character))
-        (character))))
+    (header
+      (section_name
+        (character_choice
+          (character_range
+            start: (character)
+            end: (character))
+          (character)))))
   (section
-    (section_name
-      (character_choice
-        (character)
-        (character_range
-          start: (character)
-          end: (character))
-        (character)))))
+    (header
+      (section_name
+        (character_choice
+          (character)
+          (character_range
+            start: (character)
+            end: (character))
+          (character))))))
 
 ======================================================
 Character range (Negated)
@@ -105,39 +112,39 @@ Character range (Negated)
 [[!sa-e0]]
 ------------------------------------------------------
 
-(document
+(editorconfig
   (section
-    (section_name
-      (character_choice
-        (negation)
-        (character_range
-          start: (character)
-          end: (character)))))
+    (header
+      (section_name
+        (character_choice
+          (character_range
+            start: (character)
+            end: (character))))))
   (section
-    (section_name
-      (character_choice
-        (negation)
-        (character)
-        (character_range
-          start: (character)
-          end: (character)))))
+    (header
+      (section_name
+        (character_choice
+          (character)
+          (character_range
+            start: (character)
+            end: (character))))))
   (section
-    (section_name
-      (character_choice
-        (negation)
-        (character_range
-          start: (character)
-          end: (character))
-        (character))))
+    (header
+      (section_name
+        (character_choice
+          (character_range
+            start: (character)
+            end: (character))
+          (character)))))
   (section
-    (section_name
-      (character_choice
-        (negation)
-        (character)
-        (character_range
-          start: (character)
-          end: (character))
-        (character)))))
+    (header
+      (section_name
+        (character_choice
+          (character)
+          (character_range
+            start: (character)
+            end: (character))
+          (character))))))
 
 ======================================================
 Empty character choice
@@ -146,6 +153,8 @@ Empty character choice
 [[]]
 ------------------------------------------------------
 
+
+
 ======================================================
 Empty character choice (Negated)
 :error
@@ -153,9 +162,13 @@ Empty character choice (Negated)
 [[!]]
 ------------------------------------------------------
 
+
+
 ======================================================
 Unescaped hyphen
 :error
 ======================================================
 [[a-]]
 ------------------------------------------------------
+
+

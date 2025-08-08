@@ -1,5 +1,9 @@
 #include "tree_sitter/parser.h"
 
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
 enum TokenType {
     END_OF_FILE,
     INTEGER_RANGE_START,

@@ -6,22 +6,29 @@ authors = ["Omar Valdez <omarantoniovaldezf2@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 keywords = ["incremental", "parsing", "tree-sitter", "editorconfig"]
-categories = ["parsing", "text-editors"]
+categories = ["parser-implementations", "parsing", "text-editors"]
 repository = "https://github.com/valdezfomar/tree-sitter-editorconfig"
 edition = "2021"
 autoexamples = false
 
 build = "bindings/rust/build.rs"
-include = ["bindings/rust/*", "grammar.js", "queries/*", "src/*", "tree-sitter.json"]
+include = [
+  "bindings/rust/*",
+  "grammar.js",
+  "queries/*",
+  "src/*",
+  "tree-sitter.json",
+  "/LICENSE",
+]
 
 [lib]
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-tree-sitter-language = "0.1.5"
+tree-sitter-language = "0.1"
 
 [build-dependencies]
-cc = "1.1.22"
+cc = "1.2"
 
 [dev-dependencies]
-tree-sitter = "0.25.4"
+tree-sitter = "0.26.3"

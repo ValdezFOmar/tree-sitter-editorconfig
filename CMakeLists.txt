@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-editorconfig
-        VERSION "1.1.2"
+        VERSION "1.2.0"
         DESCRIPTION "Editorconfig grammar for tree-sitter"
         HOMEPAGE_URL "https://github.com/valdezfomar/tree-sitter-editorconfig"
         LANGUAGES C)

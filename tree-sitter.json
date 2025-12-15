@@ -10,7 +10,7 @@
         ".editorconfig",
         "editorconfig"
       ],
-      "highlights": "queries/highlights.scm",
+      "highlights": "queries/editorconfig/highlights.scm",
       "injection-regex": "^editorconfig$"
     }
   ],

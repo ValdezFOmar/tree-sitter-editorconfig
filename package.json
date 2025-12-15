@@ -2,7 +2,11 @@
   "name": "tree-sitter-editorconfig",
   "version": "1.1.2",
   "description": "Editorconfig grammar for tree-sitter",
-  "repository": "https://github.com/valdezfomar/tree-sitter-editorconfig",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valdezfomar/tree-sitter-editorconfig.git"
+  },
   "license": "MIT",
   "author": {
     "name": "Omar Valdez",
@@ -32,10 +36,11 @@
   },
   "devDependencies": {
     "prebuildify": "^6.0.1",
-    "tree-sitter-cli": "^0.25.10"
+    "tree-sitter": "^0.25.0",
+    "tree-sitter-cli": "^0.26.3"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.22.1"
+    "tree-sitter": "^0.25.0"
   },
   "peerDependenciesMeta": {
     "tree-sitter": {

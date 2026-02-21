@@ -5,29 +5,26 @@ Simple brace expansions
 [*.{a,b,c}]
 [{s,a}c]
 ------------------------------------------------------
-(document
+
+(editorconfig
   (section
-    (section_name
-      (brace_expansion)))
+    (header
+      (glob
+        (brace_expansion))))
   (section
-    (section_name
-      (wildcard_characters)
-      (character)
-      (brace_expansion
-        (expansion_string
-          (character))
-        (expansion_string
-          (character))
-        (expansion_string
-          (character)))))
+    (header
+      (glob
+        (wildcard)
+        (brace_expansion
+          (glob)
+          (glob)
+          (glob)))))
   (section
-    (section_name
-      (brace_expansion
-        (expansion_string
-          (character))
-        (expansion_string
-          (character)))
-      (character))))
+    (header
+      (glob
+        (brace_expansion
+          (glob)
+          (glob))))))
 
 ======================================================
 Brace exapansions with empty strings
@@ -38,29 +35,28 @@ Brace exapansions with empty strings
 [{a,,b}]
 ------------------------------------------------------
 
-(document
+(editorconfig
   (section
-    (section_name
-      (brace_expansion
-        (expansion_string
-          (character)))))
+    (header
+      (glob
+        (brace_expansion
+          (glob)))))
   (section
-    (section_name
-      (brace_expansion
-        (expansion_string
-          (character)))))
+    (header
+      (glob
+        (brace_expansion
+          (glob)))))
   (section
-    (section_name
-      (brace_expansion
-        (expansion_string
-          (character)))))
+    (header
+      (glob
+        (brace_expansion
+          (glob)))))
   (section
-    (section_name
-      (brace_expansion
-        (expansion_string
-          (character))
-        (expansion_string
-          (character))))))
+    (header
+      (glob
+        (brace_expansion
+          (glob)
+          (glob))))))
 
 ======================================================
 Brace expansion with escaped characters
@@ -69,23 +65,22 @@ Brace expansion with escaped characters
 [{a\}}]
 ------------------------------------------------------
 
-(document
+(editorconfig
   (section
-    (section_name
-      (brace_expansion
-        (expansion_string
-          (character)
-          (escaped_character))
-        (expansion_string
-          (escaped_character))
-        (expansion_string
-          (character)))))
+    (header
+      (glob
+        (brace_expansion
+          (glob
+            (character_escape))
+          (glob
+            (character_escape))
+          (glob)))))
   (section
-    (section_name
-      (brace_expansion
-        (expansion_string
-          (character)
-          (escaped_character))))))
+    (header
+      (glob
+        (brace_expansion
+          (glob
+            (character_escape)))))))
 
 ======================================================
 Brace expansions with nested expressions
@@ -93,39 +88,29 @@ Brace expansions with nested expressions
 [/a/**{b/{c,{1..9}},e[bc]/{f?.?*,g}}]
 ------------------------------------------------------
 
-(document
+(editorconfig
   (section
-    (section_name
-      (path_separator)
-      (character)
-      (path_separator)
-      (wildcard_any_characters)
-      (brace_expansion
-        (expansion_string
-          (character)
-          (path_separator)
-          (brace_expansion
-            (expansion_string
+    (header
+      (glob
+        (wildcard)
+        (brace_expansion
+          (glob
+            (brace_expansion
+              (glob)
+              (glob
+                (integer_range
+                  start: (integer)
+                  end: (integer)))))
+          (glob
+            (character_choice
+              (character)
               (character))
-            (expansion_string
-              (integer_range
-                start: (integer)
-                end: (integer)))))
-        (expansion_string
-          (character)
-          (character_choice
-            (character)
-            (character))
-          (path_separator)
-          (brace_expansion
-            (expansion_string
-              (character)
-              (wildcard_single_character)
-              (character)
-              (wildcard_single_character)
-              (wildcard_characters))
-            (expansion_string
-              (character))))))))
+            (brace_expansion
+              (glob
+                (wildcard)
+                (wildcard)
+                (wildcard))
+              (glob))))))))
 
 ======================================================
 Integer Range
@@ -135,27 +120,32 @@ Integer Range
 [{-10..2}]
 [{-1..-20}]
 ------------------------------------------------------
-(document
+
+(editorconfig
   (section
-    (section_name
-      (integer_range
-        start: (integer)
-        end: (integer))))
+    (header
+      (glob
+        (integer_range
+          start: (integer)
+          end: (integer)))))
   (section
-    (section_name
-      (integer_range
-        start: (integer)
-        end: (integer))))
+    (header
+      (glob
+        (integer_range
+          start: (integer)
+          end: (integer)))))
   (section
-    (section_name
-      (integer_range
-        start: (integer)
-        end: (integer))))
+    (header
+      (glob
+        (integer_range
+          start: (integer)
+          end: (integer)))))
   (section
-    (section_name
-      (integer_range
-        start: (integer)
-        end: (integer)))))
+    (header
+      (glob
+        (integer_range
+          start: (integer)
+          end: (integer))))))
 
 ======================================================
 Brace expansions with integers
@@ -166,39 +156,27 @@ Brace expansions with integers
 [{30,-44,5}]
 ------------------------------------------------------
 
-(document
+(editorconfig
   (section
-    (section_name
-      (brace_expansion
-        (expansion_string
-          (character)
-          (character)
-          (character)))))
+    (header
+      (glob
+        (brace_expansion
+          (glob)))))
   (section
-    (section_name
-      (brace_expansion
-        (expansion_string
-          (character)
-          (character)
-          (character)))))
+    (header
+      (glob
+        (brace_expansion
+          (glob)))))
   (section
-    (section_name
-      (brace_expansion
-        (expansion_string
-          (character)
-          (character)
-          (character))
-        (expansion_string
-          (character)))))
+    (header
+      (glob
+        (brace_expansion
+          (glob)
+          (glob)))))
   (section
-    (section_name
-      (brace_expansion
-        (expansion_string
-          (character)
-          (character))
-        (expansion_string
-          (character)
-          (character)
-          (character))
-        (expansion_string
-          (character))))))
+    (header
+      (glob
+        (brace_expansion
+          (glob)
+          (glob)
+          (glob))))))

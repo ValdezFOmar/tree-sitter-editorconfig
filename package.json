@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-editorconfig",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Editorconfig grammar for tree-sitter",
   "type": "module",
   "repository": {

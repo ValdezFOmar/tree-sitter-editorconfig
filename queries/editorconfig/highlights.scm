@@ -1,48 +1,70 @@
 (comment) @comment
 
-(character) @constant
+(property) @property
 
-(section_name
-  (character) @type)
+(string) @string
 
-(expansion_string
-  (character) @type)
+(header
+  (glob) @string.special.path)
+
+(character) @character
+
+(character_escape) @string.escape
+
+(integer) @number
+
+(wildcard) @character.special
 
 [
- "["
- "]"
- "{"
- "}"
-] @punctuation.bracket
+  "="
+  "!"
+] @operator
 
 [
-  (path_separator)
   ","
+  "-"
+  "/"
+  ".."
 ] @punctuation.delimiter
 
 [
-  "-"
-  ".."
-  "="
-  (negation)
-  (wildcard_characters)
-  (wildcard_any_characters)
-  (wildcard_single_character)
-] @operator
+  "["
+  "]"
+  "{"
+  "}"
+] @punctuation.bracket
 
-(escaped_character) @string.special
+; Extra captures for special editorconfig values
 
-(pair
-  key: (identifier) @property
-  value: (_)? @string)
-
-(boolean) @boolean
-(integer) @number
-
-[
-  (unset)
-  (spelling_language)
-  (indent_style)
-  (end_of_line)
-  (charset)
-] @constant.builtin
+; ((pair
+;   key: (property) @_key
+;   value: (string) @string.special)
+;   (#eq? @_key "indent_style")
+;   (#any-of? @string.special "space" "tab"))
+;
+; ((pair
+;   key: (property) @_key
+;   value: (string) @string.special)
+;   (#eq? @_key "indent_size")
+;   (#eq? @string.special "tab"))
+;
+; ((pair
+;   key: (property) @_key
+;   value: (string) @string.special)
+;   (#eq? @_key "end_of_line")
+;   (#any-of? @string.special "lf" "cr" "crlf"))
+;
+; ((pair
+;   key: (property) @_key
+;   value: (string) @string.special)
+;   (#eq? @_key "charset")
+;   (#any-of? @string.special "latin1" "utf-8" "utf-8-bom" "utf-16be" "utf-16le"))
+;
+; ((string) @boolean
+;   (#any-of? @boolean "true" "false" "off"))
+;
+; ((string) @number
+;   (#lua-match? @number "^[0-9]+$"))
+;
+; ((string) @string.special
+;   (#eq? @string.special "unset"))

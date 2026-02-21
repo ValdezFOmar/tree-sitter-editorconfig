@@ -9,6 +9,7 @@
 
 const NEWLINE = /\r?\n/;
 const WHITE_SPACE = /[ \t]/;
+const CHOICE_CHARACTER = /[^\]\r\n]/;
 
 export default grammar({
   name: 'editorconfig',
@@ -18,15 +19,10 @@ export default grammar({
     $._integer_range_start,
   ],
 
-  inline: $ => [
-    $._eol,
-    $._line,
-  ],
-
   extras: _ => [WHITE_SPACE],
 
   rules: {
-    document: $ => seq(
+    editorconfig: $ => seq(
       optional($.preamble),
       repeat($.section),
     ),
@@ -37,47 +33,30 @@ export default grammar({
 
     preamble: $ => repeat1($._line),
 
-    section: $ => seq($._section_header, repeat($._line)),
-
-    _section_header: $ => seq(
-      '[',
-      alias($._glob_expression, $.section_name),
-      ']',
-      $._eol,
+    section: $ => seq(
+      $.header,
+      repeat($._line),
     ),
+
+    header: $ => seq('[', $.glob, ']', $._eol),
 
     // https://spec.editorconfig.org/#glob-expressions
-    _glob_expression: $ => repeat1(choice(
-      $.character,
+    glob: $ => prec.right(repeat1(choice(
+      '/',
+      $.wildcard,
       $.integer_range,
-      $.path_separator,
       $.brace_expansion,
       $.character_choice,
-      $.escaped_character,
-      $.wildcard_characters,
-      $.wildcard_any_characters,
-      $.wildcard_single_character,
-    )),
+      $.character_escape,
+      /[^?*{}\[\]/\r\n]/,
+    ))),
 
-    wildcard_characters: _ => '*',
-    wildcard_any_characters: _ => '**',
-    wildcard_single_character: _ => '?',
-    path_separator: _ => '/',
-    character: _ => /[^?*/\n{}\[\]]/,
+    wildcard: _ => token(choice('*', '**', '?')),
 
-    escaped_character: _ => /\\\W/,
+    character_escape: _ => /\\[?*{},\[\]\\]/,
 
     // Empty strings are allowed
-    brace_expansion: $ => seq(
-      '{',
-      repeat(choice(
-        ',',
-        $.expansion_string,
-      )),
-      '}'
-    ),
-
-    expansion_string: $ => prec.left(repeat1(prec.right($._glob_expression))),
+    brace_expansion: $ => seq('{', repeat(choice(',', $.glob)), '}'),
 
     integer_range: $ => seq(
       '{',
@@ -87,57 +66,38 @@ export default grammar({
       '}',
     ),
 
+    character: _ => CHOICE_CHARACTER,
+
+    character_range: $ => seq(
+      field('start', $.character),
+      token.immediate('-'),
+      field('end', alias(token.immediate(CHOICE_CHARACTER), $.character)),
+    ),
+
     character_choice: $ => seq(
       '[',
-      optional($.negation),
+      optional(token.immediate('!')),
       repeat1(choice(
+        $.character,
         $.character_range,
-        $.escaped_character,
-        alias(/[^\]\r\n/]/, $.character),
+        alias(/\\[-\]\\]/, $.character_escape),
       )),
       ']',
     ),
 
-    negation: _ => token.immediate('!'),
-
-    character_range: $ => seq(
-      field('start', alias(/[^\]\r\n/]/, $.character)),
-      token.immediate('-'),
-      field('end', alias(token.immediate(/\w/), $.character)),
-    ),
-
     pair: $ => seq(
-      field('key', $.identifier),
+      field('key', $.property),
       '=',
       token(repeat(WHITE_SPACE)), // Eat all the leading white-space
-      field('value', optional(choice(
-        $.unset,
-        $.unknown,
-        $.integer,
-        $.boolean,
-        $.charset,
-        $.end_of_line,
-        $.indent_style,
-        $.spelling_language,
-      ))),
+      optional(field('value', $.string)),
       $._eol,
     ),
 
-    unset: _ => /unset/i,
-    integer: _ => /\d+/,
-    boolean: _ => /true|false|off/i,
-    end_of_line: _ => /lf|cr|crlf/i,
-    indent_style: _ => /space|tab/i,
-    spelling_language: _ => /[a-z]{2}(-[A-Z]{2})?/,
-    charset: _ => /latin1|utf-8|utf-16be|utf-16le|utf-8-bom/i,
+    // Starts and ends with a non-whitespace character,
+    // with any character (including whitespace) in the middle.
+    property: _ => /[^\s=#;\[]([^\n\r=]*[^\s=])?/,
 
-    // Starts and ends with a non-whitespace character, with
-    // any character (including withespace) in the middle.
-    identifier: _ => /[^\s=#;\[]([^\n\r=]*[^\s=])?/,
-
-    // The spec allows the use of arbitrary values even if they are not supported
-    // so this capture is used as a fallback if no supported values match
-    unknown: _ => /\S([^\n\r]*\S)?/,
+    string: _ => /\S([^\n\r]*\S)?/,
 
     _eol: $ => choice(NEWLINE, $._end_of_file),
   },

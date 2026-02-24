@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
       day: saturday
     commit-message:
       prefix: ci
@@ -17,7 +17,7 @@ updates:
     versioning-strategy: increase
     directory: /
     schedule:
-      interval: weekly
+      interval: quarterly
       day: sunday
     commit-message:
       prefix: build(deps)
@@ -30,7 +30,7 @@ updates:
   - package-ecosystem: cargo
     directory: /
     schedule:
-      interval: weekly
+      interval: quarterly
       day: sunday
     commit-message:
       prefix: build(deps)

@@ -35,7 +35,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-14]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -81,3 +81,22 @@ jobs:
           clang-format-version: '21'
           check-path: 'src'
           include-regex: '^src/scanner\.c$'
+
+  query:
+    name: Validate queries
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@v6
+
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v2
+
+      - name: Build parser
+        run: tree-sitter build
+
+      - name: Set up ts_query_ls
+        run: curl -fL https://github.com/ribru17/ts_query_ls/releases/latest/download/ts_query_ls-x86_64-unknown-linux-gnu.tar.gz | tar -xz
+
+      - name: Check queries
+        run: ./ts_query_ls check -f queries/

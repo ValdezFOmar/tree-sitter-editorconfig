@@ -3,7 +3,7 @@ IndentCaseLabels: true
 # When clang-format 22 is available, change to:
 # AlignAfterOpenBracket: true
 # BreakAfterOpenBracketFunction: true
-AlignAfterOpenBracket: AlwaysBreak
+AlignAfterOpenBracket: BlockIndent
 # Enable when clang-format 22 is available
 # BreakBeforeCloseBracketFunction: true
 AllowShortFunctionsOnASingleLine: Empty

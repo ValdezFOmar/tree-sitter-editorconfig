@@ -39,7 +39,8 @@ static inline bool parse_integer_range(TSLexer *lexer) {
 }
 
 bool tree_sitter_editorconfig_external_scanner_scan(
-    void *payload, TSLexer *lexer, const bool *valid_symbols) {
+    void *payload, TSLexer *lexer, const bool *valid_symbols
+) {
     if (valid_symbols[END_OF_FILE] && valid_symbols[INTEGER_RANGE_START]) {
         // Tree-sitter is in error correction mode, don't parse anything
         return false;
@@ -70,4 +71,5 @@ unsigned tree_sitter_editorconfig_external_scanner_serialize(void *payload, char
 }
 
 void tree_sitter_editorconfig_external_scanner_deserialize(
-    void *payload, const char *buffer, unsigned length) {}
+    void *payload, const char *buffer, unsigned length
+) {}

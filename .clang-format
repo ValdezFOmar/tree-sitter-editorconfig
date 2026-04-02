@@ -1,11 +1,8 @@
 BasedOnStyle: LLVM
 IndentCaseLabels: true
-# When clang-format 22 is available, change to:
-# AlignAfterOpenBracket: true
-# BreakAfterOpenBracketFunction: true
-AlignAfterOpenBracket: BlockIndent
-# Enable when clang-format 22 is available
-# BreakBeforeCloseBracketFunction: true
+AlignAfterOpenBracket: true
+BreakAfterOpenBracketFunction: true
+BreakBeforeCloseBracketFunction: true
 AllowShortFunctionsOnASingleLine: Empty
 ColumnLimit: 100
 IndentWidth: 4

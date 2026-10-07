@@ -31,11 +31,19 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "[#;].*"
+          "value": "[#;][^\\n]*"
         },
         {
-          "type": "SYMBOL",
-          "name": "_eol"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "\\r?\\n"
+            },
+            {
+              "type": "EOF"
+            }
+          ]
         }
       ]
     },
@@ -95,8 +103,16 @@
           "value": "]"
         },
         {
-          "type": "SYMBOL",
-          "name": "_eol"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "\\r?\\n"
+            },
+            {
+              "type": "EOF"
+            }
+          ]
         }
       ]
     },
@@ -377,8 +393,16 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_eol"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "\\r?\\n"
+            },
+            {
+              "type": "EOF"
+            }
+          ]
         }
       ]
     },
@@ -389,19 +413,6 @@
     "string": {
       "type": "PATTERN",
       "value": "\\S([^\\n\\r]*\\S)?"
-    },
-    "_eol": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "\\r?\\n"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_end_of_file"
-        }
-      ]
     }
   },
   "extras": [
@@ -413,10 +424,6 @@
   "conflicts": [],
   "precedences": [],
   "externals": [
-    {
-      "type": "SYMBOL",
-      "name": "_end_of_file"
-    },
     {
       "type": "SYMBOL",
       "name": "_integer_range_start"

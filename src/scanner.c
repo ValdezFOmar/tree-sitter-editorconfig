@@ -5,7 +5,6 @@
 #include "tree_sitter/parser.h"
 
 enum TokenType {
-    END_OF_FILE,
     INTEGER_RANGE_START,
 };
 
@@ -41,18 +40,6 @@ static inline bool parse_integer_range(TSLexer *lexer) {
 bool tree_sitter_editorconfig_external_scanner_scan(
     void *payload, TSLexer *lexer, const bool *valid_symbols
 ) {
-    if (valid_symbols[END_OF_FILE] && valid_symbols[INTEGER_RANGE_START]) {
-        // Tree-sitter is in error correction mode, don't parse anything
-        return false;
-    }
-
-    if (valid_symbols[END_OF_FILE] && lexer->eof(lexer)) {
-        lexer->advance(lexer, false);
-        lexer->mark_end(lexer);
-        lexer->result_symbol = END_OF_FILE;
-        return true;
-    }
-
     if (valid_symbols[INTEGER_RANGE_START]) {
         return parse_integer_range(lexer);
     }

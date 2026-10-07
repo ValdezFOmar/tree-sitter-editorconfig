@@ -24,7 +24,7 @@ static inline bool parse_integer_range(TSLexer *lexer) {
     while (is_digit(lexer->lookahead)) {
         lexer->advance(lexer, false);
     }
-    // Integer ends here, but keep parsing to see if its a valid integer range
+    // Integer ends here, but keep parsing to see if it's part of a valid integer range
     lexer->mark_end(lexer);
 
     previous = lexer->lookahead;

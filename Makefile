@@ -1,6 +1,6 @@
 LANGUAGE_NAME := tree-sitter-editorconfig
 HOMEPAGE_URL := https://github.com/valdezfomar/tree-sitter-editorconfig
-VERSION := 2.0.0
+VERSION := 2.0.1
 DESCRIPTION := Editorconfig grammar for tree-sitter
 
 # repository

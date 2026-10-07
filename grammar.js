@@ -8,6 +8,7 @@
 // @ts-check
 
 const NEWLINE = /\r?\n/;
+const EOL = choice(NEWLINE, eof());
 const WHITE_SPACE = /[ \t]/;
 const CHOICE_CHARACTER = /[^\]\r\n]/;
 
@@ -15,7 +16,6 @@ export default grammar({
   name: 'editorconfig',
 
   externals: $ => [
-    $._end_of_file,
     $._integer_range_start,
   ],
 
@@ -27,7 +27,7 @@ export default grammar({
       repeat($.section),
     ),
 
-    comment: $ => seq(/[#;].*/, $._eol),
+    comment: _ => seq(/[#;][^\n]*/, EOL),
 
     _line: $ => choice($.pair, $.comment, NEWLINE),
 
@@ -38,7 +38,7 @@ export default grammar({
       repeat($._line),
     ),
 
-    header: $ => seq('[', $.glob, ']', $._eol),
+    header: $ => seq('[', $.glob, ']', EOL),
 
     // https://spec.editorconfig.org/#glob-expressions
     glob: $ => prec.right(repeat1(choice(
@@ -90,7 +90,7 @@ export default grammar({
       '=',
       token(repeat(WHITE_SPACE)), // Eat all the leading white-space
       optional(field('value', $.string)),
-      $._eol,
+      EOL,
     ),
 
     // Starts and ends with a non-whitespace character,
@@ -98,7 +98,5 @@ export default grammar({
     property: _ => /[^\s=#;\[]([^\n\r=]*[^\s=])?/,
 
     string: _ => /\S([^\n\r]*\S)?/,
-
-    _eol: $ => choice(NEWLINE, $._end_of_file),
   },
 });
